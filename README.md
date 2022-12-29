@@ -1,5 +1,6 @@
 # deploy
-Runtime repository for langrenn-sprint som starter opp alle tjenester, frontend og backend 
+
+Runtime repository for langrenn-sprint som starter opp alle tjenester, frontend og backend
 
 ## Slik går du fram for å kjøre dette lokalt eller på en skytjeneste
 
@@ -8,29 +9,40 @@ Runtime repository for langrenn-sprint som starter opp alle tjenester, frontend 
 3. Tildele dns navn - eks: ragdesprinten.norwayeast.cloudapp.azure.com
 
 4. kommandoer for å innstallere containere (kan trolig optimaliseres - trenger ikke alt dette)
+
+```Shell
 sudo apt-get update
 sudo apt-get install python-is-python3
-curl -sSL https://install.python-poetry.org | python3 -
+curl -sSL <https://install.python-poetry.org> | python3 -
 log out and back in
 sudo apt install docker-compose
-sudo git clone https://github.com/langrenn-sprint/deploy.git
+sudo git clone <https://github.com/langrenn-sprint/deploy.git>
 copy .env file og secrets (inkl GOOGLE_APPLICATION_CREDENTIALS)
 sudo usermod -aG docker $USER #deretter logge ut og inn igjen
 docker-compose up --build
+```
 
 ## AZURE remote access
+
+```Shell
 ssh -i /home/heming/github/sprint-ubuntu_key.pem azureuser@sprint.northeurope.cloudapp.azure.com
 ssh -i /home/heming/github/sprint2-ubuntu_key_0223.pem azureuser@ragdesprinten.norwayeast.cloudapp.azure.com
+```
+
 ## slette images og containere
+
+```Shell
 sudo docker image prune -a
 sudo docker rm -f $(sudo docker ps -a -q)
 sudo docker-compose rm result-service-gui
+```
 
+## Miljøvariable
 
-# Miljøvariable
+Du må sette opp ei .env fil med miljøvariable. Eksempel:
 
 ```Shell
-Du må sette opp ei .env fil med miljøvariable. Eksempel:JWT_SECRET=secret
+JWT_SECRET=secret
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=password
 DB_USER=admin
@@ -49,3 +61,4 @@ USERS_HOST_SERVER=localhost
 USERS_HOST_PORT=8086
 USER_SERVICE_HOST=localhost
 USER_SERVICE_PORT=8086
+```
