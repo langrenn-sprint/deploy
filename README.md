@@ -29,6 +29,28 @@ ssh -i /home/heming/github/sprint-ubuntu_key.pem azureuser@sprint.northeurope.
 ssh -i /home/heming/github/sprint2-ubuntu_key_0223.pem azureuser@ragdesprinten.norwayeast.cloudapp.azure.com
 ```
 
+## Starte opp containere
+
+Når du har logga inn på serveren, kjører du følgende kommandoer:
+
+```Shell
+docker-compose up -d
+```
+
+## Monitorere logger
+
+Gå til folderen der docker-compose filen ligger og kjør følgende kommando:
+
+```Shell
+docker-compose logs -f
+```
+
+## Stoppe containere
+
+```Shell
+docker-compose down
+```
+
 ## slette images og containere
 
 ```Shell
