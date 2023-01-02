@@ -14,10 +14,10 @@ Runtime repository for langrenn-sprint som starter opp alle tjenester, frontend 
 sudo apt-get update
 sudo apt-get install python-is-python3
 curl -sSL <https://install.python-poetry.org> | python3 -
-log out and back in
+# log out and back in
 sudo apt install docker-compose
 sudo git clone <https://github.com/langrenn-sprint/deploy.git>
-copy .env file og secrets (inkl GOOGLE_APPLICATION_CREDENTIALS)
+# copy .env file og secrets (inkl GOOGLE_APPLICATION_CREDENTIALS)
 sudo usermod -aG docker $USER #deretter logge ut og inn igjen
 docker-compose up --build
 ```
@@ -31,10 +31,10 @@ ssh -i /home/heming/github/sprint2-ubuntu_key_0223.pem azureuser@ragdesprinten
 
 ## Starte opp containere
 
-Når du har logga inn på serveren, kjører du følgende kommandoer:
+Når du har logga inn på serveren, gå til folderen der docker-compose filen ligger og kjør følgende kommandoer:
 
 ```Shell
-docker-compose up -d
+docker-compose pull && docker-compose up -d # Henter siste versjon av containere og starter dem
 ```
 
 ## Monitorere logger
@@ -46,6 +46,14 @@ docker-compose logs -f
 ```
 
 ## Stoppe containere
+
+Følgende kommando stopper alle services:
+
+```Shell
+docker-compose stop
+```
+
+Følgende kommando stopper og fjerner containere:
 
 ```Shell
 docker-compose down
