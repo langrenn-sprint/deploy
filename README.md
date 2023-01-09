@@ -92,3 +92,23 @@ USERS_HOST_PORT=8086
 USER_SERVICE_HOST=localhost
 USER_SERVICE_PORT=8086
 ```
+
+## Backup
+
+I Azure VM, stoppe containere i deploy-folder
+Rekursivt endre ownership på data-folder
+
+```Shell
+docker-compose stop
+sudo chown azureuser:azureuser data -R
+```
+
+På local pc, opprette backup-folder i deploy-folder
+På lokal pc, i home-folder, køyre scp
+
+```Shell
+mdir src/langrenn-sprint/deploy/backup_20230109
+scp -i .ssh/sprint-demo2_key.pem -r  azureuser@sprint-demo2.northeurope.cloudapp.azure.com:/home/azureuser/github/deploy/data/. src/langrenn-sprint/deploy/backup_20230109/
+```
+
+I deploy-folder, starte containere på nytt eller lokalt (docker-compose up -d )
