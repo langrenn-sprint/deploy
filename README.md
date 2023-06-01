@@ -65,6 +65,7 @@ docker-compose down
 sudo docker image prune -a
 sudo docker rm -f $(sudo docker ps -a -q)
 sudo docker-compose rm result-service-gui
+sudo docker network prune
 ```
 
 ## Miljøvariable
