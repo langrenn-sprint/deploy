@@ -5,7 +5,9 @@ services:
     ports:
       - 8090:8080
     volumes:
-      - ./secrets:/secrets
+      - type: bind
+        source: .
+        target: /app
     environment:
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
