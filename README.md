@@ -19,14 +19,18 @@ sudo apt install docker-compose
 sudo git clone <https://github.com/langrenn-sprint/deploy.git>
 # copy .env file og secrets (inkl GOOGLE_APPLICATION_CREDENTIALS)
 sudo usermod -aG docker $USER #deretter logge ut og inn igjen
-docker-compose up --build
+# secrets og konfigurasjon
+# opprette en .env fil med miljøvariable, se under
+source .env
+docker-compose pull
+docker-compose up &
 ```
 
-## AZURE remote access
+## AZURE remote access og secrets upload
 
 ```Shell
 ssh -i /home/heming/github/sprint-ubuntu_key.pem azureuser@sprint.northeurope.cloudapp.azure.com
-ssh -i /home/heming/github/sprint2-ubuntu_key_0223.pem azureuser@ragdesprinten.norwayeast.cloudapp.azure.com
+scp -i sprint-langrenn_key.pem -r application_default_credentials.json azureuser@20.251.168.187:/home/azureuser/github/secrets/.
 ```
 
 ## Starte opp containere
@@ -63,9 +67,10 @@ docker-compose down
 
 ```Shell
 docker image prune -a
-docker rm -f $(docker ps -a -q)
+docker rm -f $(sudo docker ps -a -q)
 docker-compose rm result-service-gui
 docker network prune
+```
 ```
 
 ## Miljøvariable
@@ -76,6 +81,7 @@ Du må sette opp ei .env fil med miljøvariable. Eksempel:
 JWT_SECRET=secret
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=password
+GOOGLE_APPLICATION_CREDENTIALS="/home/azureuser/github/secrets/application_default_credentials.json"
 DB_USER=admin
 DB_PASSWORD=password
 EVENTS_HOST_SERVER=localhost
