@@ -26,11 +26,11 @@ docker-compose pull
 docker-compose up &
 ```
 
-## AZURE remote access og secrets upload
+## AZURE remote access og secrets upload (lokasjon til secrets file må ligge i .env GOOGLE_APPLICATION_CREDENTIALS
 
 ```Shell
 ssh -i /home/heming/github/sprint-ubuntu_key.pem azureuser@sprint.northeurope.cloudapp.azure.com
-scp -i sprint-langrenn_key.pem -r application_default_credentials.json azureuser@20.251.168.187:/home/azureuser/github/secrets/.
+scp -i sprint-langrenn_key.pem -r application_default_credentials.json azureuser@20.251.168.187:/home/azureuser/github/deploy/.
 ```
 
 ## Starte opp containere
@@ -81,7 +81,7 @@ Du må sette opp ei .env fil med miljøvariable. Eksempel:
 JWT_SECRET=secret
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=password
-GOOGLE_APPLICATION_CREDENTIALS="/home/azureuser/github/secrets/application_default_credentials.json"
+GOOGLE_APPLICATION_CREDENTIALS="application_default_credentials.json"
 DB_USER=admin
 DB_PASSWORD=password
 EVENTS_HOST_SERVER=localhost
