@@ -4,6 +4,8 @@ services:
     image: ghcr.io/langrenn-sprint/result-service-gui:latest
     ports:
       - 8090:8080
+    volumes:
+      - ./secrets:/secrets
     environment:
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
