@@ -6,7 +6,7 @@ services:
       - 8090:8080
     volumes:
       - type: bind
-        source: $(pwd)/${GOOGLE_APPLICATION_CREDENTIALS}
+        source: ./${GOOGLE_APPLICATION_CREDENTIALS}
         target: /app/${GOOGLE_APPLICATION_CREDENTIALS}
     environment:
       - ADMIN_USERNAME=${ADMIN_USERNAME}
