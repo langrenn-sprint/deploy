@@ -26,7 +26,7 @@ docker-compose pull
 docker-compose up &
 ```
 
-## AZURE remote access og secrets upload (lokasjon til secrets file må ligge i .env GOOGLE_APPLICATION_CREDENTIALS
+## AZURE remote access og secrets upload (lokasjon til secrets file må ligge i .env GOOGLE_APPLICATION_CREDENTIALS)
 
 ```Shell
 ssh -i /home/heming/github/sprint-ubuntu_key.pem azureuser@sprint.northeurope.cloudapp.azure.com
@@ -70,7 +70,6 @@ docker image prune -a
 docker rm -f $(sudo docker ps -a -q)
 docker-compose rm result-service-gui
 docker network prune
-```
 ```
 
 ## Miljøvariable
