@@ -26,9 +26,11 @@ docker-compose pull
 docker-compose up &
 ```
 
-## AZURE remote access og secrets upload (lokasjon til secrets file må ligge i .env GOOGLE_APPLICATION_CREDENTIALS)
+## Tilgang til Google Pub-sub (lokasjon til secrets file må ligge i .env GOOGLE_APPLICATION_CREDENTIALS)
 
-```Shell
+Set upp application default credentials: https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to
+
+```Shell kommandoer hvis du skal laste filen opp på en Azure virtuell server
 ssh -i /home/heming/github/sprint-ubuntu_key.pem azureuser@sprint.northeurope.cloudapp.azure.com
 scp -i sprint-langrenn_key.pem -r application_default_credentials.json azureuser@20.251.168.187:/home/azureuser/github/deploy/.
 ```
@@ -85,6 +87,7 @@ DB_USER=admin
 DB_PASSWORD=password
 EVENTS_HOST_SERVER=localhost
 EVENTS_HOST_PORT=8082
+ERROR_FILE=error.log
 PHOTOS_HOST_SERVER=localhost
 PHOTOS_HOST_PORT=8092
 FERNET_KEY=23EHUWpP_tpleR_RjuX5hxndWqyc0vO-cjNUMSzbjN4=
