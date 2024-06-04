@@ -13,10 +13,10 @@ Runtime repository for langrenn-sprint som starter opp alle tjenester, frontend 
 ```Shell
 sudo apt-get update
 sudo apt-get install python-is-python3
-curl -sSL <https://install.python-poetry.org> | python3 -
+curl -sSL https://install.python-poetry.org | python3 -
 # log out and back in
 sudo apt install docker-compose
-sudo git clone <https://github.com/langrenn-sprint/deploy.git>
+sudo git clone https://github.com/langrenn-sprint/deploy.git
 # copy .env file og secrets (inkl GOOGLE_APPLICATION_CREDENTIALS)
 sudo usermod -aG docker $USER #deretter logge ut og inn igjen
 # secrets og konfigurasjon
