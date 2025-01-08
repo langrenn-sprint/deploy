@@ -40,7 +40,7 @@ scp -i sprint-langrenn_key.pem -r application_default_credentials.json azureuser
 Når du har logga inn på serveren, gå til folderen der docker-compose filen ligger og kjør følgende kommandoer:
 
 ```Shell
-docker-compose pull && docker-compose up -d # Henter siste versjon av containere og starter dem
+docker-compose pull && docker-compose up & # Henter siste versjon av containere og starter dem
 ```
 
 ## Monitorere logger
@@ -52,12 +52,6 @@ docker-compose logs -f
 ```
 
 ## Stoppe containere
-
-Følgende kommando stopper alle services:
-
-```Shell
-docker-compose stop
-```
 
 Følgende kommando stopper og fjerner containere:
 
