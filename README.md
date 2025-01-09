@@ -28,7 +28,7 @@ docker-compose up &
 
 ## Tilgang til Google Pub-sub (lokasjon til secrets file må ligge i .env GOOGLE_APPLICATION_CREDENTIALS)
 
-Set upp application default credentials: https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to
+Set upp application default credentials: <https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to>
 
 ```Shell kommandoer hvis du skal laste filen opp på en Azure virtuell server
 ssh -i /home/heming/github/sprint-ubuntu_key.pem azureuser@sprint.northeurope.cloudapp.azure.com
@@ -115,5 +115,6 @@ På lokal pc, i home-folder, køyre scp
 ```Shell
 mkdir backup_skagen
 scp -i key.pem -r azureuser@<domain/ip>:/home/azureuser/github/deploy/data backup_skagen
+```
 
 I deploy-folder, starte containere på nytt eller lokalt (docker-compose up -d )
