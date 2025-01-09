@@ -114,7 +114,7 @@ På lokal pc, i home-folder, køyre scp
 
 ```Shell
 mkdir backup_skagen
-scp -i key.pem -r azureuser@<domain/ip>:/home/azureuser/github/deploy/data backup_skagen
+scp -i key.pem -r azureuser@<domain/ip>:/home/azureuser/deploy/data backup_skagen
 ```
 
 I deploy-folder, starte containere på nytt eller lokalt (docker-compose up -d )
