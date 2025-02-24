@@ -18,6 +18,7 @@ curl -sSL https://install.python-poetry.org | python3 -
 sudo apt install docker-compose
 sudo git clone https://github.com/langrenn-sprint/deploy.git
 # copy .env file og secrets (inkl GOOGLE_APPLICATION_CREDENTIALS)
+# Tips - sudo apt install nano (hvis du ikke har en editor)
 sudo usermod -aG docker $USER #deretter logge ut og inn igjen
 # secrets og konfigurasjon
 # opprette en .env fil med miljøvariable, se under
