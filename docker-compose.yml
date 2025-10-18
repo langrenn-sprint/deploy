@@ -1,4 +1,3 @@
-version: '3'
 services:
   result-service-gui:
     image: ghcr.io/langrenn-sprint/result-service-gui:latest

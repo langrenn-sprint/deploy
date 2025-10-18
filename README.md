@@ -8,23 +8,20 @@ Runtime repository for langrenn-sprint som starter opp alle tjenester, frontend 
 2. Networking: Open up port 8080 and 8090 for incoming traffic from any * incoming source.
 3. Tildele dns navn - eks: ragdesprinten.norwayeast.cloudapp.azure.com
 
-4. kommandoer for å innstallere containere (kan trolig optimaliseres - trenger ikke alt dette)
+4. kommandoer for å innstallere containere
 
 ```Shell
 sudo apt-get update
-sudo apt-get install python-is-python3
-curl -sSL https://install.python-poetry.org | python3 -
-# log out and back in
-sudo apt install docker-compose
+
+curl -sSL https://get.docker.com | sh
 sudo git clone https://github.com/langrenn-sprint/deploy.git
 # copy .env file og secrets (inkl GOOGLE_APPLICATION_CREDENTIALS)
-# Tips - sudo apt install nano (hvis du ikke har en editor)
 sudo usermod -aG docker $USER #deretter logge ut og inn igjen
 # secrets og konfigurasjon
 # opprette en .env fil med miljøvariable, se under
 source .env
-docker-compose pull
-docker-compose up &
+docker compose pull
+docker compose up &
 ```
 
 ## Tilgang til Google Pub-sub (lokasjon til secrets file må ligge i .env GOOGLE_APPLICATION_CREDENTIALS)
@@ -86,7 +83,6 @@ ERROR_FILE=error.log
 PHOTOS_HOST_SERVER=localhost
 PHOTOS_HOST_PORT=8092
 FERNET_KEY=23EHUWpP_tpleR_RjuX5hxndWqyc0vO-cjNUMSzbjN4=
-GOOGLE_OAUTH_CLIENT_ID=826356442895-g21vdoamuakjgrdparu4nem2hr930bnn.apps.googleusercontent.com
 JWT_EXP_DELTA_SECONDS=10000
 LOGGING_LEVEL=INFO
 RACE_HOST_SERVER=localhost
