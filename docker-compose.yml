@@ -162,6 +162,13 @@ services:
       - "mongodb"
   integration-service:
     image: ghcr.io/langrenn-sprint/integration-service:latest
+    volumes:
+      - type: bind
+        source: ./application_default_credentials.json
+        target: /app/application_default_credentials.json
+      - type: bind
+        source: ./error.log
+        target: /app/error.log
     environment:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
