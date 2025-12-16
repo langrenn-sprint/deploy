@@ -29,7 +29,6 @@ services:
       - RACE_HOST_PORT=8080
       - USERS_HOST_SERVER=user-service
       - USERS_HOST_PORT=8080
-      - GOOGLE_PUBSUB_NUM_MESSAGES=${GOOGLE_PUBSUB_NUM_MESSAGES}
       - RACE_DURATION_ESTIMATE=${RACE_DURATION_ESTIMATE}
       - RACE_TIME_DEVIATION_ALLOWED=${RACE_TIME_DEVIATION_ALLOWED}
     depends_on:
@@ -161,6 +160,24 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
     depends_on:
       - "mongodb"
+  integration-service:
+    image: ghcr.io/langrenn-sprint/integration-service:latest
+    environment:
+      - LOGGING_LEVEL=${LOGGING_LEVEL}
+      - ADMIN_USERNAME=${ADMIN_USERNAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - EVENTS_HOST_SERVER=event-service
+      - EVENTS_HOST_PORT=8080
+      - PHOTOS_HOST_SERVER=photo-service
+      - PHOTOS_HOST_PORT=8080
+      - RACE_HOST_SERVER=race-service
+      - RACE_HOST_PORT=8080
+      - USERS_HOST_SERVER=user-service
+      - USERS_HOST_PORT=8080
+      - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
+      - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT}
+      - GOOGLE_STORAGE_BUCKET=${GOOGLE_STORAGE_BUCKET}
+      - GOOGLE_STORAGE_SERVER=${GOOGLE_STORAGE_SERVER}
   mongodb:
     image: mongo:latest
     ports:
