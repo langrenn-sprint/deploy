@@ -52,12 +52,17 @@ docker compose up race-service competition-format-service photo-service user-ser
 
 ```
 
-Starte opp kun capture
-```Shell
-docker compose up integration-service video-service-capture
-
-```
-
+## Sette opp DNS og SSL (Https) 
+Hint: bruk copilot for å få CLI kommandoer
+1. DNS entry settes opp hos ISP. Må peke på en public IP på serveren.
+2. Installer nginx reverse proxy på serveren
+3. Generere sertifikat med certbot
+4. Lag Nginx Configuration Filer med følgende config:
+   HTTP trafikk på port 80 (default) skal sendes til port 443 (tvinge HTTPS)
+   Trafikk på port 443 skal sendes til backend på port 8090 (result-service-gui - tjenesten)
+   Trafikk på port 8080 skal sendes til backend på port 8081 (event-service-gui - tjenesten)
+5. Valider config og restart Nginx
+6. Endre i docker-compose filen slik at event-service-gui er kjører på port 8081 (ikke 8080)
 
 ## Monitorere logger
 
