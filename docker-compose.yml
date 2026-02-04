@@ -28,7 +28,7 @@ services:
       - RACE_HOST_SERVER=race-service
       - RACE_HOST_PORT=8080
       - USERS_HOST_SERVER=user-service
-      - USERS_HOST_PORT=8080
+      - USERS_HOST_PORT=8000
       - RACE_DURATION_ESTIMATE=${RACE_DURATION_ESTIMATE}
       - RACE_TIME_DEVIATION_ALLOWED=${RACE_TIME_DEVIATION_ALLOWED}
     depends_on:
@@ -59,7 +59,7 @@ services:
       - RESULT_GUI_HOST_SERVER=result-service-gui
       - RESULT_GUI_HOST_PORT=8080
       - USERS_HOST_SERVER=user-service
-      - USERS_HOST_PORT=8080
+      - USERS_HOST_PORT=8000
     depends_on:
       - "competition-format-service"
       - "event-service"
@@ -76,7 +76,7 @@ services:
       - COMPETITION_FORMAT_HOST_SERVER=competition-format-service
       - COMPETITION_FORMAT_HOST_PORT=8000
       - USERS_HOST_SERVER=user-service
-      - USERS_HOST_PORT=8080
+      - USERS_HOST_PORT=8000
       - LOGGING_LEVEL=${LOGGING_LEVEL}
       - DB_HOST=mongodb
       - DB_PORT=27017
@@ -98,7 +98,7 @@ services:
       - EVENTS_HOST_SERVER=event-service
       - EVENTS_HOST_PORT=8080
       - USERS_HOST_SERVER=user-service
-      - USERS_HOST_PORT=8080
+      - USERS_HOST_PORT=8000
       - LOGGING_LEVEL=${LOGGING_LEVEL}
       - DB_HOST=mongodb
       - DB_PORT=27017
@@ -117,7 +117,7 @@ services:
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - USERS_HOST_SERVER=user-service
-      - USERS_HOST_PORT=8080
+      - USERS_HOST_PORT=8000
       - LOGGING_LEVEL=${LOGGING_LEVEL}
       - DB_HOST=mongodb
       - DB_PORT=27017
@@ -135,7 +135,7 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
       - USERS_HOST_SERVER=user-service
-      - USERS_HOST_PORT=8080
+      - USERS_HOST_PORT=8000
       - DB_HOST=mongodb
       - DB_PORT=27017
       - DB_USER=${DB_USER}
@@ -147,7 +147,7 @@ services:
   user-service:
     image: ghcr.io/langrenn-sprint/user-service:latest
     ports:
-      - 8086:8080
+      - 8086:8000
     environment:
       - JWT_EXP_DELTA_SECONDS=${JWT_EXP_DELTA_SECONDS}
       - JWT_SECRET=${JWT_SECRET}
@@ -180,7 +180,7 @@ services:
       - RACE_HOST_SERVER=race-service
       - RACE_HOST_PORT=8080
       - USERS_HOST_SERVER=user-service
-      - USERS_HOST_PORT=8080
+      - USERS_HOST_PORT=8000
       - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
       - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT}
       - GOOGLE_STORAGE_BUCKET=${GOOGLE_STORAGE_BUCKET}
