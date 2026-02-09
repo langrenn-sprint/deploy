@@ -186,7 +186,7 @@ services:
       - GOOGLE_STORAGE_BUCKET=${GOOGLE_STORAGE_BUCKET}
       - GOOGLE_STORAGE_SERVER=${GOOGLE_STORAGE_SERVER}
   mongodb:
-    image: mongo:latest
+    image: mongo:7-jammy
     ports:
       - 27017:27017
     volumes:
@@ -195,6 +195,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
   mongo-express:
+    profiles: ["dev"]
     image: mongo-express:latest
     ports:
       - 8081:8081
