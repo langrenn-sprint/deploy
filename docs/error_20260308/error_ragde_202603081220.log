@@ -1,0 +1,1298 @@
+2026-03-08 11:57:38,270 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:57:38,322 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:57:38,373 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:57:38,488 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:57:42,324 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:57:42,449 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:57:42,501 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:57:42,554 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:57:42,676 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:57:50,805 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:57:51,005 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:57:53,795 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:57:54,080 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:58:05,847 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:58:05,929 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:58:05,967 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:58:06,005 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:58:06,122 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:58:06,123 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:58:06,125 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:58:06,628 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:58:06,909 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:58:35,507 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:58:35,714 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:58:50,248 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:58:50,330 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:58:50,368 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:58:50,408 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:58:50,519 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:58:50,522 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:58:50,523 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:58:50,525 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:58:50,527 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:18,076 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:18,196 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:18,245 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:18,296 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:18,424 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:22,690 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:22,844 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:22,895 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:22,952 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:23,099 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:26,920 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:27,013 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:27,051 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:27,090 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:27,207 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:27,210 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:27,212 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:27,214 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:27,217 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:33,228 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:33,430 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:33,587 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:35,897 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:35,987 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:36,024 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:36,065 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:36,179 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:36,182 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:36,183 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:36,185 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:36,188 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:45,078 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:45,202 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:45,249 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:45,299 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 11:59:45,417 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:53,923 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:57,448 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:59,349 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 11:59:59,489 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:02,736 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:02,822 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:02,863 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:02,902 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:03,025 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:03,028 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:03,029 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:03,031 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:03,033 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:07,069 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:07,149 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:07,188 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:07,260 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:07,383 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:07,384 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:07,386 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:08,737 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:08,924 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:12,743 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:12,829 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:12,869 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:12,911 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:13,035 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:13,038 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:13,039 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:13,042 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:13,044 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:30,448 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:30,491 - ERROR - Club logo not found - Skimt
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Skim'
+2026-03-08 12:00:33,388 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:33,704 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:35,454 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:40,071 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:00:42,432 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:01:07,301 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:01:18,320 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:01:56,476 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:02:18,983 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:04:18,382 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:14:21,520 - ERROR - Club logo not found - Try, Idrettslaget
+Traceback (most recent call last):
+  File "/app/result_service_gui/services/events_adapter.py", line 182, in get_club_logo_url
+    logo_url = logo_urls[club_name_short]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'Try,'
+2026-03-08 12:20:10,117 - ERROR - Error. Redirect to main page.
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1298, in _wrap_create_connection
+    sock = await aiohappyeyeballs.start_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 73, in start_connection
+    sock = await _connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 208, in _connect_sock
+    await loop.sock_connect(sock, address)
+  File "/usr/local/lib/python3.13/asyncio/selector_events.py", line 645, in sock_connect
+    return await fut
+           ^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 672, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1239, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1611, in _create_direct_connection
+    raise last_exc
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1580, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1295, in _wrap_create_connection
+    async with ceil_timeout(
+               ~~~~~~~~~~~~^
+        timeout.sock_connect, ceil_threshold=timeout.ceil_threshold
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/asyncio/timeouts.py", line 116, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/result_service_gui/views/start.py", line 60, in get
+    _tmp_races = await RaceplansAdapter().get_all_races(user["token"], event_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/result_service_gui/services/raceplans_adapter.py", line 148, in get_all_races
+    session.get(
+    ~~~~~~~~~~~^
+        f"{RACE_SERVICE_URL}/races?eventId={event_id}", headers=headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as resp,
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 738, in _connect_and_send_request
+    raise ConnectionTimeoutError(
+        f"Connection timeout to host {req.url}"
+    ) from exc
+aiohttp.client_exceptions.ConnectionTimeoutError: Connection timeout to host http://race-service:8080/races?eventId=8853e411-0424-47b9-bded-643a067d4cba
+2026-03-08 12:20:12,117 - ERROR - Error. Redirect to main page.
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1298, in _wrap_create_connection
+    sock = await aiohappyeyeballs.start_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 73, in start_connection
+    sock = await _connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 208, in _connect_sock
+    await loop.sock_connect(sock, address)
+  File "/usr/local/lib/python3.13/asyncio/selector_events.py", line 645, in sock_connect
+    return await fut
+           ^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 672, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1239, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1611, in _create_direct_connection
+    raise last_exc
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1580, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1295, in _wrap_create_connection
+    async with ceil_timeout(
+               ~~~~~~~~~~~~^
+        timeout.sock_connect, ceil_threshold=timeout.ceil_threshold
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/asyncio/timeouts.py", line 116, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/result_service_gui/views/live.py", line 71, in get
+    races = await get_races(
+            ^^^^^^^^^^^^^^^^
+        user["token"], event_id, valgt_klasse, valgt_startnr, action
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/result_service_gui/views/live.py", line 182, in get_races
+    races = await get_races_for_live(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+        token, event_id, valgt_klasse, valgt_startnr, action
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/result_service_gui/views/live.py", line 203, in get_races_for_live
+    _tmp_races = await RaceplansAdapter().get_races_by_racesclass(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        token, event_id, valgt_klasse
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/result_service_gui/services/raceplans_adapter.py", line 239, in get_races_by_racesclass
+    session.get(
+    ~~~~~~~~~~~^
+        f"{RACE_SERVICE_URL}/races?eventId={event_id}&raceclass={valgt_klasse}",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        headers=headers,
+        ^^^^^^^^^^^^^^^^
+    ) as resp,
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 738, in _connect_and_send_request
+    raise ConnectionTimeoutError(
+        f"Connection timeout to host {req.url}"
+    ) from exc
+aiohttp.client_exceptions.ConnectionTimeoutError: Connection timeout to host http://race-service:8080/races?eventId=8853e411-0424-47b9-bded-643a067d4cba&raceclass=G12
+2026-03-08 12:20:28,117 - ERROR - Error. Redirect to main page.
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1298, in _wrap_create_connection
+    sock = await aiohappyeyeballs.start_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 73, in start_connection
+    sock = await _connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 208, in _connect_sock
+    await loop.sock_connect(sock, address)
+  File "/usr/local/lib/python3.13/asyncio/selector_events.py", line 645, in sock_connect
+    return await fut
+           ^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 672, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1239, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1611, in _create_direct_connection
+    raise last_exc
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1580, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1295, in _wrap_create_connection
+    async with ceil_timeout(
+               ~~~~~~~~~~~~^
+        timeout.sock_connect, ceil_threshold=timeout.ceil_threshold
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/asyncio/timeouts.py", line 116, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/result_service_gui/views/start.py", line 60, in get
+    _tmp_races = await RaceplansAdapter().get_all_races(user["token"], event_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/result_service_gui/services/raceplans_adapter.py", line 148, in get_all_races
+    session.get(
+    ~~~~~~~~~~~^
+        f"{RACE_SERVICE_URL}/races?eventId={event_id}", headers=headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as resp,
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 738, in _connect_and_send_request
+    raise ConnectionTimeoutError(
+        f"Connection timeout to host {req.url}"
+    ) from exc
+aiohttp.client_exceptions.ConnectionTimeoutError: Connection timeout to host http://race-service:8080/races?eventId=8853e411-0424-47b9-bded-643a067d4cba
+2026-03-08 12:22:08,693 - ERROR - Error. Redirect to main page.
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1298, in _wrap_create_connection
+    sock = await aiohappyeyeballs.start_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 73, in start_connection
+    sock = await _connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 208, in _connect_sock
+    await loop.sock_connect(sock, address)
+  File "/usr/local/lib/python3.13/asyncio/selector_events.py", line 645, in sock_connect
+    return await fut
+           ^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 672, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1239, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1611, in _create_direct_connection
+    raise last_exc
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1580, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1295, in _wrap_create_connection
+    async with ceil_timeout(
+               ~~~~~~~~~~~~^
+        timeout.sock_connect, ceil_threshold=timeout.ceil_threshold
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/asyncio/timeouts.py", line 116, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/result_service_gui/views/start.py", line 60, in get
+    _tmp_races = await RaceplansAdapter().get_all_races(user["token"], event_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/result_service_gui/services/raceplans_adapter.py", line 148, in get_all_races
+    session.get(
+    ~~~~~~~~~~~^
+        f"{RACE_SERVICE_URL}/races?eventId={event_id}", headers=headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as resp,
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 738, in _connect_and_send_request
+    raise ConnectionTimeoutError(
+        f"Connection timeout to host {req.url}"
+    ) from exc
+aiohttp.client_exceptions.ConnectionTimeoutError: Connection timeout to host http://race-service:8080/races?eventId=8853e411-0424-47b9-bded-643a067d4cba
+2026-03-08 12:22:08,721 - ERROR - Error. Redirect to main page.
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1298, in _wrap_create_connection
+    sock = await aiohappyeyeballs.start_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 73, in start_connection
+    sock = await _connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 208, in _connect_sock
+    await loop.sock_connect(sock, address)
+  File "/usr/local/lib/python3.13/asyncio/selector_events.py", line 645, in sock_connect
+    return await fut
+           ^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 672, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1239, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1611, in _create_direct_connection
+    raise last_exc
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1580, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1295, in _wrap_create_connection
+    async with ceil_timeout(
+               ~~~~~~~~~~~~^
+        timeout.sock_connect, ceil_threshold=timeout.ceil_threshold
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/asyncio/timeouts.py", line 116, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/result_service_gui/views/start.py", line 60, in get
+    _tmp_races = await RaceplansAdapter().get_all_races(user["token"], event_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/result_service_gui/services/raceplans_adapter.py", line 148, in get_all_races
+    session.get(
+    ~~~~~~~~~~~^
+        f"{RACE_SERVICE_URL}/races?eventId={event_id}", headers=headers
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as resp,
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 738, in _connect_and_send_request
+    raise ConnectionTimeoutError(
+        f"Connection timeout to host {req.url}"
+    ) from exc
+aiohttp.client_exceptions.ConnectionTimeoutError: Connection timeout to host http://race-service:8080/races?eventId=8853e411-0424-47b9-bded-643a067d4cba
+2026-03-08 12:22:08,708 - ERROR - Error. Redirect to main page.
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1298, in _wrap_create_connection
+    sock = await aiohappyeyeballs.start_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 73, in start_connection
+    sock = await _connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 208, in _connect_sock
+    await loop.sock_connect(sock, address)
+  File "/usr/local/lib/python3.13/asyncio/selector_events.py", line 645, in sock_connect
+    return await fut
+           ^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 672, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1239, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1611, in _create_direct_connection
+    raise last_exc
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1580, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1295, in _wrap_create_connection
+    async with ceil_timeout(
+               ~~~~~~~~~~~~^
+        timeout.sock_connect, ceil_threshold=timeout.ceil_threshold
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/asyncio/timeouts.py", line 116, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/result_service_gui/views/live.py", line 71, in get
+    races = await get_races(
+            ^^^^^^^^^^^^^^^^
+        user["token"], event_id, valgt_klasse, valgt_startnr, action
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/result_service_gui/views/live.py", line 182, in get_races
+    races = await get_races_for_live(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+        token, event_id, valgt_klasse, valgt_startnr, action
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/result_service_gui/views/live.py", line 203, in get_races_for_live
+    _tmp_races = await RaceplansAdapter().get_races_by_racesclass(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        token, event_id, valgt_klasse
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/result_service_gui/services/raceplans_adapter.py", line 239, in get_races_by_racesclass
+    session.get(
+    ~~~~~~~~~~~^
+        f"{RACE_SERVICE_URL}/races?eventId={event_id}&raceclass={valgt_klasse}",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        headers=headers,
+        ^^^^^^^^^^^^^^^^
+    ) as resp,
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 738, in _connect_and_send_request
+    raise ConnectionTimeoutError(
+        f"Connection timeout to host {req.url}"
+    ) from exc
+aiohttp.client_exceptions.ConnectionTimeoutError: Connection timeout to host http://race-service:8080/races?eventId=8853e411-0424-47b9-bded-643a067d4cba&raceclass=J11
+2026-03-08 12:22:08,709 - ERROR - Error. Redirect to main page.
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1298, in _wrap_create_connection
+    sock = await aiohappyeyeballs.start_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 73, in start_connection
+    sock = await _connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohappyeyeballs/impl.py", line 208, in _connect_sock
+    await loop.sock_connect(sock, address)
+  File "/usr/local/lib/python3.13/asyncio/selector_events.py", line 645, in sock_connect
+    return await fut
+           ^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 672, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1239, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1611, in _create_direct_connection
+    raise last_exc
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1580, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1295, in _wrap_create_connection
+    async with ceil_timeout(
+               ~~~~~~~~~~~~^
+        timeout.sock_connect, ceil_threshold=timeout.ceil_threshold
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/asyncio/timeouts.py", line 116, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/result_service_gui/views/live.py", line 71, in get
+    races = await get_races(
+            ^^^^^^^^^^^^^^^^
+        user["token"], event_id, valgt_klasse, valgt_startnr, action
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/result_service_gui/views/live.py", line 182, in get_races
+    races = await get_races_for_live(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+        token, event_id, valgt_klasse, valgt_startnr, action
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/result_service_gui/views/live.py", line 203, in get_races_for_live
+    _tmp_races = await RaceplansAdapter().get_races_by_racesclass(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        token, event_id, valgt_klasse
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/app/result_service_gui/services/raceplans_adapter.py", line 239, in get_races_by_racesclass
+    session.get(
+    ~~~~~~~~~~~^
+        f"{RACE_SERVICE_URL}/races?eventId={event_id}&raceclass={valgt_klasse}",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        headers=headers,
+        ^^^^^^^^^^^^^^^^
+    ) as resp,
+    ^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.13/site-packages/aiohttp/client.py", line 738, in _connect_and_send_request
+    raise ConnectionTimeoutError(
+        f"Connection timeout to host {req.url}"
+    ) from exc
+aiohttp.client_exceptions.ConnectionTimeoutError: Connection timeout to host http://race-service:8080/races?eventId=8853e411-0424-47b9-bded-643a067d4cba&raceclass=G11
