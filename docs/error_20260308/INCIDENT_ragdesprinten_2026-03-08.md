@@ -38,7 +38,7 @@ Gjenopprettingssteg:
 4. Flytting av fast ekstern IP til ny VM
 5. Verifisering av at domenet pekte korrekt
 
-Kommandoer som ble brukt er dokumentert i [RUNBOOK_failover_result_service.md](RUNBOOK_failover_result_service.md).
+Kommandoer som ble brukt er dokumentert i [RUNBOOK_failover_result_service.md](../RUNBOOK_failover_result_service.md).
 
 ### Applikasjonsfeil (sekundærsymptom)
 Etter at infrastrukturen feilet, viste loggene `ConnectionTimeoutError` på interne kall fra `result-service-gui` til `race-service:8080`. Alle GUI-forespørsler ga `Error. Redirect to main page.`
@@ -97,7 +97,7 @@ Merk: Loggutdraget dekker kun ~2 min, ikke hele nedetidsvinduet på ~8 timer.
 
 ### A. Umiddelbart (før neste arrangement)
 1. **Driftsberedskap** — avtal vaktordning med incident lead + backup og eskaleringsplan (maks 10 min responstid)
-2. **Failover-runbook** — lag og test (mål: tjeneste oppe innen 15 min). Se [RUNBOOK_failover_result_service.md](RUNBOOK_failover_result_service.md)
+2. **Failover-runbook** — lag og test (mål: tjeneste oppe innen 15 min). Se [RUNBOOK_failover_result_service.md](../RUNBOOK_failover_result_service.md)
 3. **Forhåndsgodkjente soner** — dokumenter minst to (f.eks. `europe-north1-a` og `europe-north1-c`)
 4. **Enkel helsesjekk** — ett script som verifiserer alle kritiske tjenester
 
