@@ -72,7 +72,7 @@ Merk: Loggutdraget dekker kun ~2 min, ikke hele nedetidsvinduet på ~8 timer.
 
 ## 5) Rotårsak
 
-**Primær:** Kapasitetsmangel i `europe-north1-a` for maskintype `e2-standard-2` ved restart. Single-zone avhengighet uten failover.
+**Primær:** Kapasitetsmangel i `europe-north1-a` for maskintype `e2-standard-2` ved restart. Single-zone avhengighet uten failover. Reservert kapasitet var ikke benyttet.
 
 **Sekundær:** Timeout-feilene i applikasjonen er symptomer — de oppsto fordi backend-tjenestene ikke lenger var tilgjengelige.
 
@@ -126,7 +126,7 @@ Merk: Loggutdraget dekker kun ~2 min, ikke hele nedetidsvinduet på ~8 timer.
 
 ## 9) Åpne beslutninger
 
-- Skal vi betale for kapasitetsreservasjon i kritisk periode?
+- Skal vi betale for kapasitetsreservasjon i kritisk periode (ref https://docs.cloud.google.com/compute/docs/instances/reservations-overview)?
 - Skal vi ha standby-instans i sekundær sone under arrangement?
 - Hvem eier failover-runbook og er incident lead?
 - Hva er akseptert maks nedetid?
