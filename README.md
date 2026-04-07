@@ -2,7 +2,7 @@
 
 Runtime repository for langrenn-sprint som starter opp alle tjenester, frontend og backend
 
-## Slik går du fram for å kjøre dette lokalt eller på en skytjeneste
+## Slik går du fram for å kjøre dette lokalt eller på en skytjeneste (UpCloud er anbefalt)
 1. Sette opp virtuell server - ubuntu 24.04 LTS
 2. Networking: Open up port 8080 for incoming traffic from any * incoming source.
 3. kommandoer for å innstallere containere (kan trolig optimaliseres - trenger ikke alt dette)
@@ -11,7 +11,7 @@ Runtime repository for langrenn-sprint som starter opp alle tjenester, frontend 
 sudo apt-get update
 
 curl -sSL https://get.docker.com | sh
-sudo git clone https://github.com/langrenn-sprint/deploy-video-edge.git
+sudo git clone https://github.com/langrenn-sprint/deploy.git
 # copy .env file og secrets (inkl GOOGLE_APPLICATION_CREDENTIALS)
 sudo usermod -aG docker $USER #deretter logge ut og inn igjen
 # secrets og konfigurasjon
@@ -27,8 +27,8 @@ docker compose up photo-service race-service event-service competition-format-se
 Set upp application default credentials: https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to
 
 ```Bruk vim eller Shell. Kommandoer hvis du skal laste filen opp på en Azure virtuell server
-ssh -i /home/heming/github/sprint-ubuntu_key.pem azureuser@sprint.northeurope.cloudapp.azure.com
-scp -i key.pem -r application_default_credentials.json azureuser@20.251.168.187:/home/azureuser/github/deploy-video-service/.
+ssh -i sprint_key.pem user@myserver.com
+scp -i key.pem -r application_default_credentials.json user@20.251.168.187:/home/user/github/deploy/.
 Tips: chmod 700 på nøkkelen
 ```
 
@@ -38,17 +38,17 @@ source .venv/bin/activate
 
 ## Starte opp containere
 
-Når du har logga inn på serveren, gå til folderen der docker-compose filen ligger og kjør følgende kommandoer:
+Når du har logga inn på serveren, gå til folderen der docker compose filen ligger og kjør følgende kommandoer:
 
-```Filhåndtering - lage bind-mounts som stemmer med referansene i docker-compose filen og sikre at alle har tilgang
+```Filhåndtering - lage bind-mounts som stemmer med referansene i docker compose filen og sikre at alle har tilgang
 mkdir files
 sudo chmod -R 777 files
 
 
 Starte opp minimum alle services
 ```Shell
-docker-compose pull && docker-compose up -d # Henter siste versjon av containere og starter dem
-docker compose up race-service competition-format-service photo-service user-service event-service mongodb event-service-gui result-service-gui
+docker compose pull && docker compose up -d # Henter siste versjon av containere og starter dem
+docker compose up race-service competition-format-service photo-service user-service event-service mongodb event-service-gui result-service-gui integration-service # starte tjenester individuelt
 
 ```
 
@@ -62,11 +62,11 @@ Hint: bruk copilot for å få CLI kommandoer
    Trafikk på port 443 skal sendes til backend på port 8090 (result-service-gui - tjenesten)
    Trafikk på port 8080 skal sendes til backend på port 8081 (event-service-gui - tjenesten)
 5. Valider config og restart Nginx
-6. Endre i docker-compose filen slik at event-service-gui er kjører på port 8081 (ikke 8080)
+6. Endre i docker compose filen slik at event-service-gui er kjører på port 8081 (ikke 8080)
 
 ## Monitorere logger
 
-Gå til folderen der docker-compose filen ligger og kjør følgende kommando:
+Gå til folderen der docker compose filen ligger og kjør følgende kommando:
 
 ```Shell
 docker compose logs -f
@@ -123,7 +123,7 @@ I Azure VM, stoppe containere i deploy-folder
 Rekursivt endre ownership på data-folder
 
 ```Shell
-docker-compose stop
+docker compose stop
 sudo chown azureuser:azureuser data -R
 ```
 
@@ -135,4 +135,4 @@ mkdir backup_skagen
 scp -i key.pem -r azureuser@<domain/ip>:/home/azureuser/deploy/data backup_skagen
 ```
 
-I deploy-folder, starte containere på nytt eller lokalt (docker-compose up -d )
+I deploy-folder, starte containere på nytt eller lokalt (docker compose up -d )
