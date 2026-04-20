@@ -16,7 +16,9 @@ sudo git clone https://github.com/langrenn-sprint/deploy.git
 sudo usermod -aG docker $USER #deretter logge ut og inn igjen
 # secrets og konfigurasjon
 # opprette en .env fil med miljøvariable, se under
+set -a
 source .env
+set +a
 docker compose pull
 docker compose up &
 docker compose up photo-service race-service event-service competition-format-service user-service mongodb photo-service-gui integration-service video-service-capture
