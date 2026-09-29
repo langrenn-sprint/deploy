@@ -117,6 +117,7 @@ GOOGLE_STORAGE_BUCKET=langrenn-sprint
 GOOGLE_STORAGE_SERVER=https://storage.googleapis.com
 RACE_DURATION_ESTIMATE=300
 RACE_TIME_DEVIATION_ALLOWED=600
+LOCAL_PHOTO_DIRECTORY=/home/heming/github/deploy/files
 ```
 
 ## Backup

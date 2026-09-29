@@ -164,6 +164,12 @@ services:
     image: ghcr.io/langrenn-sprint/integration-service:latest
     volumes:
       - type: bind
+        source: ${LOCAL_PHOTO_DIRECTORY}
+        target: /app/integration_service/files
+      - type: bind
+        source: ./global_settings.json
+        target: /app/integration_service/config/global_settings.json
+      - type: bind
         source: ./application_default_credentials.json
         target: /app/application_default_credentials.json
       - type: bind
@@ -174,7 +180,7 @@ services:
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - EVENTS_HOST_SERVER=event-service
-      - EVENTS_HOST_PORT=8080
+      - EVENTS_HOST_PORT=8000
       - PHOTOS_HOST_SERVER=photo-service
       - PHOTOS_HOST_PORT=8000
       - RACE_HOST_SERVER=race-service
