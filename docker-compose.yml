@@ -26,7 +26,7 @@ services:
       - PHOTOS_HOST_SERVER=photo-service
       - PHOTOS_HOST_PORT=8000
       - RACE_HOST_SERVER=race-service
-      - RACE_HOST_PORT=8080
+      - RACE_HOST_PORT=8000
       - USERS_HOST_SERVER=user-service
       - USERS_HOST_PORT=8000
       - RACE_DURATION_ESTIMATE=${RACE_DURATION_ESTIMATE}
@@ -55,7 +55,7 @@ services:
       - EVENTS_HOST_PORT=8000
       - LOGGING_LEVEL=${LOGGING_LEVEL}
       - RACE_HOST_SERVER=race-service
-      - RACE_HOST_PORT=8080
+      - RACE_HOST_PORT=8000
       - RESULT_GUI_HOST_SERVER=result-service-gui
       - RESULT_GUI_HOST_PORT=8080
       - USERS_HOST_SERVER=user-service
@@ -70,6 +70,8 @@ services:
     ports:
       - 8082:8000
     environment:
+      - HOST_SERVER=event-service
+      - HOST_PORT=8000
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
@@ -88,8 +90,10 @@ services:
   race-service:
     image: ghcr.io/langrenn-sprint/race-service:latest
     ports:
-      - 8088:8080
+      - 8088:8000
     environment:
+      - HOST_SERVER=race-service
+      - HOST_PORT=8000
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
@@ -113,6 +117,8 @@ services:
     ports:
       - 8092:8000
     environment:
+      - HOST_SERVER=photo-service
+      - HOST_PORT=8000
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
@@ -131,6 +137,8 @@ services:
     ports:
       - 8094:8000
     environment:
+      - HOST_SERVER=competition-format-service
+      - HOST_PORT=8000
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
@@ -149,6 +157,8 @@ services:
     ports:
       - 8086:8000
     environment:
+      - HOST_SERVER=user-service
+      - HOST_PORT=8000
       - JWT_EXP_DELTA_SECONDS=${JWT_EXP_DELTA_SECONDS}
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
@@ -184,7 +194,7 @@ services:
       - PHOTOS_HOST_SERVER=photo-service
       - PHOTOS_HOST_PORT=8000
       - RACE_HOST_SERVER=race-service
-      - RACE_HOST_PORT=8080
+      - RACE_HOST_PORT=8000
       - USERS_HOST_SERVER=user-service
       - USERS_HOST_PORT=8000
       - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
