@@ -159,8 +159,8 @@ GOOGLE_APPLICATION_CREDENTIALS="application_default_credentials.json"
 DB_USER=admin
 DB_PASSWORD=password
 ERROR_FILE=error.log
-FERNET_KEY=23EHUWpP_tpleR_RjuX5hxndWqyc0vO-cjNUMSzbjN4=
-JWT_EXP_DELTA_SECONDS=10000
+FERNET_KEY=<generer, se under>
+JWT_EXP_DELTA_SECONDS=43200  # levetid for innlogging i sekunder (12 t), se under
 LOGGING_LEVEL=INFO
 GOOGLE_APPLICATION_CREDENTIALS="application_default_credentials.json"
 GOOGLE_CLOUD_PROJECT=sigma-celerity-257719
@@ -172,6 +172,20 @@ LOCAL_PHOTO_DIRECTORY=/home/heming/github/deploy/files
 INSTANCE_NAME="UpCloud prod"  # vises i GUI, se "Systemstatus" under
 INSTANCE_ROLE=production      # production | standby | test
 ```
+
+**`FERNET_KEY`** krypterer sesjons-cookien i GUI-ene. Lag en egen nøkkel for hver instans, og del den aldri
+(ikke i git, ikke i README). En nøkkel som har stått i koden eller her er offentlig: da kan hvem som helst
+lage en gyldig innlogging-cookie. Ny nøkkel logger ut alle én gang.
+
+```Shell
+python3 -c 'import base64, os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())'
+docker compose up -d event-service-gui result-service-gui   # etter endring i .env
+```
+
+**`JWT_EXP_DELTA_SECONDS`** er hvor lenge en innlogging varer, regnet fra innlogging (ikke fra siste aktivitet).
+Med 3600 (1 time) blir brukerne kastet ut midt i arbeidet. Sett den så den dekker en løpsdag, til tokenet
+fornyes automatisk (langrenn-sprint/user-service#19). Etter endring: `docker compose up -d user-service`
+(gjelder nye innlogginger).
 
 ## Backup (uten nedetid)
 
