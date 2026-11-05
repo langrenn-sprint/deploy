@@ -11,7 +11,8 @@ Runtime repository for langrenn-sprint som starter opp alle tjenester, frontend 
 sudo apt-get update
 
 curl -sSL https://get.docker.com | sh
-sudo git clone https://github.com/langrenn-sprint/deploy.git
+git clone https://github.com/langrenn-sprint/deploy.git # uten sudo: backup- og status-skriptene må kunne skrive i folderen
+cd deploy
 # copy .env file og secrets (inkl GOOGLE_APPLICATION_CREDENTIALS)
 sudo usermod -aG docker $USER #deretter logge ut og inn igjen
 # secrets og konfigurasjon
@@ -23,6 +24,23 @@ docker compose pull
 docker compose up &
 docker compose up photo-service race-service event-service competition-format-service user-service mongodb photo-service-gui integration-service video-service-capture
 ```
+
+4. Backup og systemstatus (på VM-en, i deploy-folderen). Detaljer under [Backup](#backup-uten-nedetid).
+
+```Shell
+# i .env: navn og rolle som vises i GUI-et
+#   INSTANCE_NAME="UpCloud prod"
+#   INSTANCE_ROLE=production
+mkdir -p backups
+scripts/backup.sh                # test: skal gi en OK-linje
+crontab -e                       # legg til (tilpass stien):
+# */5 * * * * /home/<user>/deploy/scripts/backup.sh >> /home/<user>/deploy/backups/backup.log 2>&1
+scripts/install-status-timer.sh  # oppdaterer systemsiden hvert 30. sekund
+```
+
+   Valgfritt, men anbefalt: kopi av backup til GCS (`BACKUP_GCS_BUCKET` i `.env`, se [Backup](#backup-uten-nedetid)) og automatisk backup av serveren hos UpCloud.
+
+5. På lokal PC (reserve): hent backupene fra VM-en med `scripts/pull-backups.sh` fra cron, og sett `INSTANCE_ROLE=standby` i `.env` hvis PC-en skal kjøre løsningen etter en restore. Se [Backup](#backup-uten-nedetid).
 
 ## Tilgang til Google storage bucket (lokasjon til secrets file må ligge i .env GOOGLE_APPLICATION_CREDENTIALS)
 
