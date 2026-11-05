@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Write status/system.json: instance, backup status, restore info, MongoDB info, disk,
+# Write status/system.json: instance, backup status, restore info, MongoDB info, disk, memory,
 # and the services (containers and images) of this compose project.
 # The GUIs read this file (mounted read-only). Format: see issue #13.
 # Contains no personal data or secrets: only names, counts, sizes and timestamps.
@@ -111,6 +111,20 @@ else:
     restore = old.get("restore")  # database down: keep the last known value
     mongodb = {"available": False}
 
+def memory():
+    """Memory of the machine (the VM / PC running the services), from /proc/meminfo."""
+    try:
+        with open("/proc/meminfo") as f:
+            info = {k: int(v.split()[0]) * 1024 for k, v in (line.split(":", 1) for line in f)}
+    except (OSError, ValueError):
+        return None
+    return {
+        "total_bytes": info.get("MemTotal"),
+        "available_bytes": info.get("MemAvailable"),  # free + reclaimable cache: what new work can use
+        "swap_total_bytes": info.get("SwapTotal"),
+        "swap_free_bytes": info.get("SwapFree"),
+    }
+
 def docker_time(value):
     """Docker's UTC nanosecond timestamps -> local ISO 8601, None for unset/zero."""
     if not value or value.startswith("0001-"):
@@ -151,6 +165,7 @@ status = {
     "restore": restore,
     "mongodb": mongodb,
     "disk": {"total_bytes": int(env["DISK_TOTAL"]), "free_bytes": int(env["DISK_FREE"])},
+    "memory": memory(),
     "services": sorted(services.values(), key=lambda s: s["name"]),
 }
 
