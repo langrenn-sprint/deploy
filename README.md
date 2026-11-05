@@ -120,22 +120,86 @@ RACE_TIME_DEVIATION_ALLOWED=600
 LOCAL_PHOTO_DIRECTORY=/home/heming/github/deploy/files
 ```
 
-## Backup
+## Backup (uten nedetid)
 
-I Azure VM, stoppe containere i deploy-folder
-Rekursivt endre ownership på data-folder
+Databasen tas backup av mens alt kjører, med `mongodump`. Det gir én komprimert fil per backup
+som kan restores på en ny VM eller på en lokal PC. Backup-filene inneholder personopplysninger (GDPR):
+de skal aldri i git, og bucketen i GCS skal være privat.
+
+Skript i `scripts/`:
+
+| Skript | Kjøres på | Hva |
+| --- | --- | --- |
+| `backup.sh` | VM (cron) | Dump til `backups/`, siste dump per dag i `backups/daily/`, rydder gamle filer, laster opp til GCS |
+| `pull-backups.sh` | Lokal PC (cron) | Henter `backups/` fra VM-en med rsync over ssh |
+| `restore.sh` | VM / ny VM / lokal PC | Restorer en dump inn i `mongodb`-tjenesten |
+
+### 1. Backup på VM-en hvert 5. minutt
 
 ```Shell
-docker compose stop
-sudo chown azureuser:azureuser data -R
+crontab -e
+# legg til (tilpass stien):
+*/5 * * * * /home/<user>/deploy/scripts/backup.sh >> /home/<user>/deploy/backups/backup.log 2>&1
 ```
 
-På local pc, opprette backup-folder i deploy-folder
-På lokal pc, i home-folder, køyre scp
+Sjekk at det virker: `tail backups/backup.log`. Hver linje viser filstørrelse og hvor lang tid dumpen tok.
+Tar en dump mer enn ca. 30 sekunder, bør intervallet økes (f.eks. `*/15`).
+
+Standard oppbevaring på VM-en: alle dumper i 48 timer, én per dag i 30 dager
+(`BACKUP_KEEP_HOURS` / `BACKUP_KEEP_DAYS` i `.env`).
+
+### 2. Kopi til Google Cloud Storage
+
+Bruk en egen, privat bucket (ikke bucketen med bilder) og en egen service account som bare har tilgang dit.
+GCS sin soft delete (standard 7 dager) beskytter mot at filer slettes ved et uhell eller fra en kompromittert VM.
 
 ```Shell
-mkdir backup_skagen
-scp -i key.pem -r azureuser@<domain/ip>:/home/azureuser/deploy/data backup_skagen
+gcloud storage buckets create gs://<backup-bucket> --location=europe-north1 \
+  --uniform-bucket-level-access --public-access-prevention
+gcloud iam service-accounts create langrenn-backup
+gcloud storage buckets add-iam-policy-binding gs://<backup-bucket> \
+  --member=serviceAccount:langrenn-backup@<project>.iam.gserviceaccount.com \
+  --role=roles/storage.objectAdmin   # kun på denne bucketen (rclone må liste og overskrive daglig fil)
+gcloud iam service-accounts keys create backup-sa.json \
+  --iam-account=langrenn-backup@<project>.iam.gserviceaccount.com
+# slett filer i bucketen etter 30 dager
+echo '{"rule":[{"action":{"type":"Delete"},"condition":{"age":30}}]}' > lifecycle.json
+gcloud storage buckets update gs://<backup-bucket> --lifecycle-file=lifecycle.json
 ```
 
-I deploy-folder, starte containere på nytt eller lokalt (docker compose up -d )
+Kopier `backup-sa.json` til deploy-folderen på VM-en (`chmod 600 backup-sa.json`) og legg til i `.env`:
+
+```Shell
+BACKUP_GCS_BUCKET=<backup-bucket>
+# valgfritt: BACKUP_GCS_PREFIX=mongo  BACKUP_GCS_CREDENTIALS=backup-sa.json
+```
+
+### 3. Kopi til lokal PC
+
+På PC-en (krever ssh-tilgang til VM-en):
+
+```Shell
+crontab -e
+*/5 * * * * BACKUP_SSH_KEY=$HOME/.ssh/key.pem /path/to/deploy/scripts/pull-backups.sh <user>@<domain/ip>:/home/<user>/deploy/backups >> $HOME/langrenn-sprint-backups/pull.log 2>&1
+```
+
+Filene havner i `~/langrenn-sprint-backups` (dumper i 7 dager, daglige beholdes).
+
+### Restore
+
+På en ny VM eller lokal PC: klon repoet, legg inn `.env`, og kjør:
+
+```Shell
+# hent en dump, f.eks. fra GCS: gcloud storage cp gs://<backup-bucket>/mongo/<fil> backups/
+scripts/restore.sh backups/mongo_<YYYYmmdd_HHMMSS>.archive.gz
+docker compose up -d
+```
+
+Collections i dumpen erstatter de som finnes i databasen. Brukere (admin-databasen) restores ikke,
+så databasen bruker `DB_USER`/`DB_PASSWORD` fra `.env`.
+Test restore på en lokal PC før hvert arrangement.
+
+### Anbefalt i tillegg
+
+Slå på automatisk backup av serveren hos UpCloud. Det gir tilbake hele VM-en (`.env`, nginx, sertifikater),
+mens dumpene over sikrer dataene.

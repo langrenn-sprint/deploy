@@ -1,3 +1,5 @@
 .env
 data
 backup_*
+backups
+backup-sa.json
