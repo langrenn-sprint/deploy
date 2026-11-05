@@ -17,6 +17,8 @@ cd deploy
 sudo usermod -aG docker $USER #deretter logge ut og inn igjen
 # secrets og konfigurasjon
 # opprette en .env fil med miljøvariable, se under
+# lag en egen FERNET_KEY for denne instansen (se "Miljøvariable"), aldri bruk en nøkkel fra eksempler:
+echo "FERNET_KEY=$(python3 -c 'import base64, os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())')" >> .env
 set -a
 source .env
 set +a
@@ -177,9 +179,23 @@ INSTANCE_ROLE=production      # production | standby | test
 (ikke i git, ikke i README). En nøkkel som har stått i koden eller her er offentlig: da kan hvem som helst
 lage en gyldig innlogging-cookie. Ny nøkkel logger ut alle én gang.
 
+Ny instans: lag nøkkelen og legg den rett inn i `.env`:
+
 ```Shell
+echo "FERNET_KEY=$(python3 -c 'import base64, os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())')" >> .env
+```
+
+Bytte nøkkel på en instans som kjører (gjør det utenom løp, alle logges ut én gang):
+
+```Shell
+# 1. lag ny nøkkel
 python3 -c 'import base64, os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())'
-docker compose up -d event-service-gui result-service-gui   # etter endring i .env
+# 2. erstatt verdien i .env:  FERNET_KEY=<ny nøkkel>
+vim .env
+# 3. sjekk at den er satt (skal vise 1); mangler den, starter ikke GUI-ene
+grep -c '^FERNET_KEY=.\+' .env
+# 4. start GUI-ene på nytt med ny nøkkel
+docker compose up -d event-service-gui result-service-gui
 ```
 
 **`JWT_EXP_DELTA_SECONDS`** er hvor lenge en innlogging varer, regnet fra innlogging (ikke fra siste aktivitet).
