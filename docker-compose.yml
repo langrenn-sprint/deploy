@@ -36,6 +36,8 @@ services:
       - RACE_DURATION_ESTIMATE=${RACE_DURATION_ESTIMATE}
       - RACE_TIME_DEVIATION_ALLOWED=${RACE_TIME_DEVIATION_ALLOWED}
       - FERNET_KEY=${FERNET_KEY:-} # encrypts the session cookie, see README
+      - JWT_MAX_SESSION_SECONDS=${JWT_MAX_SESSION_SECONDS:-86400} # max_age of the session cookie, see README
+      - SESSION_COOKIE_SECURE=${SESSION_COOKIE_SECURE:-false} # true only behind https, see README
       - INSTANCE_NAME=${INSTANCE_NAME:-}
       - INSTANCE_ROLE=${INSTANCE_ROLE:-unknown}
       - SYSTEM_STATUS_FILE=/app/status/system.json
@@ -45,7 +47,7 @@ services:
       - "user-service"
       - "mongodb"
   event-service-gui:
-    image: ghcr.io/langrenn-sprint/event-service-gui:test
+    image: ghcr.io/langrenn-sprint/event-service-gui:latest
     ports:
       - 8080:8080
     volumes:
@@ -73,6 +75,8 @@ services:
       - USERS_HOST_SERVER=user-service
       - USERS_HOST_PORT=8000
       - FERNET_KEY=${FERNET_KEY:-} # encrypts the session cookie, see README
+      - JWT_MAX_SESSION_SECONDS=${JWT_MAX_SESSION_SECONDS:-86400} # max_age of the session cookie, see README
+      - SESSION_COOKIE_SECURE=${SESSION_COOKIE_SECURE:-false} # true only behind https, see README
       - INSTANCE_NAME=${INSTANCE_NAME:-}
       - INSTANCE_ROLE=${INSTANCE_ROLE:-unknown}
       - SYSTEM_STATUS_FILE=/app/status/system.json
@@ -176,6 +180,7 @@ services:
       - HOST_SERVER=user-service
       - HOST_PORT=8000
       - JWT_EXP_DELTA_SECONDS=${JWT_EXP_DELTA_SECONDS}
+      - JWT_MAX_SESSION_SECONDS=${JWT_MAX_SESSION_SECONDS:-86400} # max session length, see README
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
