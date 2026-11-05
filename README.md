@@ -206,7 +206,8 @@ Test restore på en lokal PC før hvert arrangement.
 
 `scripts/status.sh` skriver `status/system.json` hver gang backup eller restore kjører:
 instansnavn og rolle, siste backup (og feil), opplasting til GCS, hvilken backup instansen er
-restoret fra, MongoDB-versjon, antall dokumenter per collection og ledig disk.
+restoret fra, MongoDB-versjon, antall dokumenter per collection, ledig disk, og status, image og
+byggetidspunkt for hver tjeneste (fra `docker inspect`).
 Fila inneholder ingen personopplysninger eller hemmeligheter. Format: se issue #13.
 
 - `status/` mountes read-only inn i `event-service-gui` og `result-service-gui` (`SYSTEM_STATUS_FILE`).
