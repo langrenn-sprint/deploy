@@ -118,6 +118,7 @@ Hint: bruk copilot for å få CLI kommandoer
    Trafikk på port 8080 skal sendes til backend på port 8081 (event-service-gui - tjenesten)
 5. Valider config og restart Nginx
 6. Endre i docker compose filen slik at event-service-gui er kjører på port 8081 (ikke 8080)
+7. Sett `SESSION_COOKIE_SECURE=true` i `.env` og kjør `docker compose up -d event-service-gui result-service-gui`
 
 ## Monitorere logger
 
@@ -162,7 +163,9 @@ DB_USER=admin
 DB_PASSWORD=password
 ERROR_FILE=error.log
 FERNET_KEY=<generer, se under>
-JWT_EXP_DELTA_SECONDS=43200  # levetid for innlogging i sekunder (12 t), se under
+JWT_EXP_DELTA_SECONDS=3600        # levetid for token i sekunder (1 t), fornyes for aktive brukere, se under
+JWT_MAX_SESSION_SECONDS=86400     # maks lengde på en innlogging (24 t), se under
+SESSION_COOKIE_SECURE=true        # bare på instanser bak https, se under
 LOGGING_LEVEL=INFO
 GOOGLE_APPLICATION_CREDENTIALS="application_default_credentials.json"
 GOOGLE_CLOUD_PROJECT=sigma-celerity-257719
@@ -198,10 +201,20 @@ grep -c '^FERNET_KEY=.\+' .env
 docker compose up -d event-service-gui result-service-gui
 ```
 
-**`JWT_EXP_DELTA_SECONDS`** er hvor lenge en innlogging varer, regnet fra innlogging (ikke fra siste aktivitet).
-Med 3600 (1 time) blir brukerne kastet ut midt i arbeidet. Sett den så den dekker en løpsdag, til tokenet
-fornyes automatisk (langrenn-sprint/user-service#19). Etter endring: `docker compose up -d user-service`
-(gjelder nye innlogginger).
+**`JWT_EXP_DELTA_SECONDS`** er hvor lenge et token gjelder. GUI-ene fornyer tokenet når halve levetiden
+har gått, så en aktiv bruker holdes innlogget. En innlogging uten aktivitet utløper etter denne tiden.
+3600 (1 time) er passe. Etter endring: `docker compose up -d user-service` (gjelder nye token).
+
+**`JWT_MAX_SESSION_SECONDS`** er maks lengde på en innlogging, regnet fra innlogging med passord. Etter
+dette avviser user-service fornyelse, og brukeren må logge inn på nytt. GUI-ene bruker samme verdi som
+levetid (`max_age`) på sesjons-cookien, så innloggingen overlever at nettleseren lukkes. Standard 86400
+(24 t). Etter endring: `docker compose up -d user-service event-service-gui result-service-gui`.
+
+**`SESSION_COOKIE_SECURE`** gjør at nettleseren bare sender sesjons-cookien over https. Sett `true` på
+instanser der GUI-ene nås via https (nginx med sertifikat, se "Sette opp DNS og SSL"). La den være
+`false` (standard) på instanser som brukes over vanlig http, f.eks. en reserve-PC på lokalt nett: med
+`true` der lagrer ikke nettleseren cookien, og innlogging virker ikke (ingen feilmelding, man havner
+bare på innloggingssiden igjen). Etter endring: `docker compose up -d event-service-gui result-service-gui`.
 
 ## Backup (uten nedetid)
 
