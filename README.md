@@ -72,6 +72,39 @@ docker compose up race-service competition-format-service photo-service user-ser
 
 ```
 
+## Oppdatere én tjeneste til nytt image
+
+Eksempel med `event-service-gui`; det samme gjelder alle tjenester. De andre tjenestene fortsetter å kjøre.
+Tjenesten er nede noen sekunder under restart, så unngå dette midt i et løp.
+
+**Nytt image fra CI** (etter merge til main publiseres `ghcr.io/langrenn-sprint/<tjeneste>:latest`):
+
+```Shell
+gh run list -R langrenn-sprint/event-service-gui --limit 1   # vent til bygget er ferdig
+docker compose pull event-service-gui
+docker compose up -d event-service-gui    # lager ny container bare hvis imaget er endret
+```
+
+**Lokalt bygd image** (test av egen kode før merge). Bygg med samme navn som i `docker-compose.yml`:
+
+```Shell
+cd ~/src/langrenn-sprint/event-service-gui
+docker build -t ghcr.io/langrenn-sprint/event-service-gui:latest .
+cd ~/src/langrenn-sprint/deploy
+docker compose up -d event-service-gui    # ikke kjør pull: det overskriver det lokale imaget
+```
+
+Neste `docker compose pull` henter versjonen fra ghcr igjen.
+
+Sjekk resultatet:
+
+```Shell
+docker compose ps event-service-gui       # "Up X seconds"
+docker compose images event-service-gui   # image-ID og når det ble bygd
+docker compose logs -f event-service-gui  # feil ved oppstart
+scripts/status.sh                         # oppdaterer systemsiden med nytt image med en gang
+```
+
 ## Sette opp DNS og SSL (Https) 
 Hint: bruk copilot for å få CLI kommandoer
 1. DNS entry settes opp hos ISP. Må peke på en public IP på serveren.
