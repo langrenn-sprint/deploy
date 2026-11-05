@@ -58,8 +58,16 @@ if [[ -n $container_ids ]]; then
     # shellcheck disable=SC2086
     [[ -n $image_ids ]] && IMAGES_JSON=$(docker image inspect $image_ids 2>/dev/null || echo '[]')
 fi
+# Memory and CPU per running container (one JSON object per line). Takes about 2 s:
+# docker samples CPU over an interval.
+running_ids=$(docker compose ps -q 2>/dev/null || true)
+STATS_JSON=
+if [[ -n $running_ids ]]; then
+    # shellcheck disable=SC2086
+    STATS_JSON=$(docker stats --no-stream --format '{{json .}}' $running_ids 2>/dev/null || true)
+fi
 
-export MONGO_JSON DISK_TOTAL DISK_FREE COMPOSE_SERVICES CONTAINERS_JSON IMAGES_JSON
+export MONGO_JSON DISK_TOTAL DISK_FREE COMPOSE_SERVICES CONTAINERS_JSON IMAGES_JSON STATS_JSON
 export STATUS_FILE="$STATUS_DIR/system.json"
 export BACKUP_DIR; BACKUP_DIR=$(env_get BACKUP_DIR backups)
 export INSTANCE_NAME; INSTANCE_NAME=$(env_get INSTANCE_NAME)
@@ -135,6 +143,37 @@ def docker_time(value):
     except ValueError:
         return None
 
+UNITS = {"b": 1, "kb": 1e3, "mb": 1e6, "gb": 1e9, "tb": 1e12,
+         "kib": 2**10, "mib": 2**20, "gib": 2**30, "tib": 2**40}
+
+def size_bytes(text):
+    """'52.71MiB' -> bytes (int), None if it can't be parsed."""
+    m = re.fullmatch(r"\s*([\d.]+)\s*([A-Za-z]+)\s*", text or "")
+    if not m or m.group(2).lower() not in UNITS:
+        return None
+    return int(float(m.group(1)) * UNITS[m.group(2).lower()])
+
+def percent(text):
+    try:
+        return round(float((text or "").rstrip("%")), 2)
+    except ValueError:
+        return None
+
+stats = {}
+for line in env.get("STATS_JSON", "").splitlines():
+    try:
+        st = json.loads(line)
+    except ValueError:
+        continue
+    used, _, limit = (st.get("MemUsage") or "").partition("/")
+    stats[st.get("Container")] = {
+        "memory_bytes": size_bytes(used),
+        "memory_limit_bytes": size_bytes(limit),  # the machine's memory unless a limit is set
+        "memory_percent": percent(st.get("MemPerc")),
+        "cpu_percent": percent(st.get("CPUPerc")),  # 100 = one full CPU core
+    }
+NO_STATS = dict.fromkeys(["memory_bytes", "memory_limit_bytes", "memory_percent", "cpu_percent"])
+
 images = {i["Id"]: i for i in json.loads(env["IMAGES_JSON"] or "[]")}
 services = {}
 for c in json.loads(env["CONTAINERS_JSON"] or "[]"):
@@ -153,6 +192,7 @@ for c in json.loads(env["CONTAINERS_JSON"] or "[]"):
         "image_created": docker_time(image.get("Created")),
         "revision": oci.get("org.opencontainers.image.revision"),
         "source": oci.get("org.opencontainers.image.source"),
+        **stats.get(c["Id"], NO_STATS),
     }
 for name in env["COMPOSE_SERVICES"].split():
     services.setdefault(name, {"name": name, "state": "missing"})
