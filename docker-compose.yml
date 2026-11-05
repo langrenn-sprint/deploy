@@ -10,6 +10,10 @@ services:
       - type: bind
         source: ./error.log
         target: /app/error.log
+      - type: bind
+        source: ./status
+        target: /app/status
+        read_only: true
     environment:
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
@@ -31,6 +35,9 @@ services:
       - USERS_HOST_PORT=8000
       - RACE_DURATION_ESTIMATE=${RACE_DURATION_ESTIMATE}
       - RACE_TIME_DEVIATION_ALLOWED=${RACE_TIME_DEVIATION_ALLOWED}
+      - INSTANCE_NAME=${INSTANCE_NAME:-}
+      - INSTANCE_ROLE=${INSTANCE_ROLE:-unknown}
+      - SYSTEM_STATUS_FILE=/app/status/system.json
     depends_on:
       - "competition-format-service"
       - "event-service"
@@ -44,6 +51,10 @@ services:
       - type: bind
         source: ./error.log
         target: /app/error.log
+      - type: bind
+        source: ./status
+        target: /app/status
+        read_only: true
     environment:
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
@@ -60,6 +71,9 @@ services:
       - RESULT_GUI_HOST_PORT=8080
       - USERS_HOST_SERVER=user-service
       - USERS_HOST_PORT=8000
+      - INSTANCE_NAME=${INSTANCE_NAME:-}
+      - INSTANCE_ROLE=${INSTANCE_ROLE:-unknown}
+      - SYSTEM_STATUS_FILE=/app/status/system.json
     depends_on:
       - "competition-format-service"
       - "event-service"

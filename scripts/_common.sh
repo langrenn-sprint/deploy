@@ -33,3 +33,16 @@ tool=$1; shift
 '
     docker compose exec -T mongodb sh -c "$inner" sh "$@"
 }
+
+# mongo_eval <js> [docker compose exec options...]: run JavaScript in mongosh inside the
+# mongodb container. `c` is an authenticated connection to the admin database.
+# Credentials are read from the container's environment, never from a command line.
+# Extra arguments go to `docker compose exec`, e.g. -e NAME=value to pass values to the
+# script (read them with process.env.NAME).
+mongo_eval() {
+    local js=$1; shift
+    docker compose exec -T "$@" mongodb mongosh --nodb --quiet --eval "
+const c = connect('mongodb://127.0.0.1:27017/admin');
+c.auth(process.env.MONGO_INITDB_ROOT_USERNAME, process.env.MONGO_INITDB_ROOT_PASSWORD);
+$js"
+}

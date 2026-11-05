@@ -118,6 +118,8 @@ GOOGLE_STORAGE_SERVER=https://storage.googleapis.com
 RACE_DURATION_ESTIMATE=300
 RACE_TIME_DEVIATION_ALLOWED=600
 LOCAL_PHOTO_DIRECTORY=/home/heming/github/deploy/files
+INSTANCE_NAME="UpCloud prod"  # vises i GUI, se "Systemstatus" under
+INSTANCE_ROLE=production      # production | standby | test
 ```
 
 ## Backup (uten nedetid)
@@ -133,6 +135,7 @@ Skript i `scripts/`:
 | `backup.sh` | VM (cron) | Dump til `backups/`, siste dump per dag i `backups/daily/`, rydder gamle filer, laster opp til GCS |
 | `pull-backups.sh` | Lokal PC (cron) | Henter `backups/` fra VM-en med rsync over ssh |
 | `restore.sh` | VM / ny VM / lokal PC | Restorer en dump inn i `mongodb`-tjenesten |
+| `status.sh` | Kalles av `backup.sh` og `restore.sh` | Skriver `status/system.json` som GUI-et viser |
 
 ### 1. Backup på VM-en hvert 5. minutt
 
@@ -198,6 +201,20 @@ docker compose up -d
 Collections i dumpen erstatter de som finnes i databasen. Brukere (admin-databasen) restores ikke,
 så databasen bruker `DB_USER`/`DB_PASSWORD` fra `.env`.
 Test restore på en lokal PC før hvert arrangement.
+
+### Systemstatus for GUI
+
+`scripts/status.sh` skriver `status/system.json` hver gang backup eller restore kjører:
+instansnavn og rolle, siste backup (og feil), opplasting til GCS, hvilken backup instansen er
+restoret fra, MongoDB-versjon, antall dokumenter per collection og ledig disk.
+Fila inneholder ingen personopplysninger eller hemmeligheter. Format: se issue #13.
+
+- `status/` mountes read-only inn i `event-service-gui` og `result-service-gui` (`SYSTEM_STATUS_FILE`).
+- `INSTANCE_NAME` og `INSTANCE_ROLE` i `.env` sendes til GUI-ene. Når rollen ikke er `production`,
+  skal GUI-et vise et tydelig banner (langrenn-sprint/event-service-gui#198).
+  **Sett `INSTANCE_ROLE=standby` på en reserveinstans** (f.eks. lokal PC etter restore).
+- `restore.sh` lagrer hvilken fil som ble restoret i databasen `deploy_system`, collection `restores`.
+- Oppdatere manuelt: `scripts/status.sh`
 
 ### Anbefalt i tillegg
 

@@ -7,6 +7,8 @@
 #
 # Collections in the dump REPLACE the ones in the database (--drop).
 # Users (admin db) are not touched: the database keeps the DB_USER/DB_PASSWORD from .env.
+# Afterwards a record of the restore is written to deploy_system.restores (shown in the GUI)
+# and status/system.json is refreshed.
 # After the restore, start the rest of the services: docker compose up -d
 
 set -euo pipefail
@@ -49,4 +51,22 @@ done
 log "restoring $archive"
 mongo_tool mongorestore --archive --gzip --drop \
     --nsExclude 'admin.*' --nsExclude 'config.*' < "$archive"
+
+# Record which backup this instance now runs on (kept in later backups as history).
+mongo_eval '
+c.getSiblingDB("deploy_system").restores.insertOne({
+  archive: process.env.R_ARCHIVE,
+  archive_sha256: process.env.R_SHA256,
+  archive_time: process.env.R_ARCHIVE_TIME,
+  restored_at: process.env.R_RESTORED_AT,
+  restored_on: process.env.R_INSTANCE || null,
+});' \
+    -e R_ARCHIVE="$(basename "$archive")" \
+    -e R_SHA256="$(sha256sum "$archive" | cut -d' ' -f1)" \
+    -e R_ARCHIVE_TIME="$(date -r "$archive" -Iseconds)" \
+    -e R_RESTORED_AT="$(date -Iseconds)" \
+    -e R_INSTANCE="$(env_get INSTANCE_NAME)" >/dev/null \
+    || log "WARNING could not write the restore record to deploy_system.restores"
+scripts/status.sh || log "WARNING could not update status/system.json"
+
 log "OK restore done. Start the services with: docker compose up -d"
