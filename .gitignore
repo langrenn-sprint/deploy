@@ -3,4 +3,5 @@ data
 backup_*
 backups
 backup-sa.json
-status/*.json
+status/*
+!status/.gitkeep

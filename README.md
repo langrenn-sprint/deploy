@@ -135,7 +135,8 @@ Skript i `scripts/`:
 | `backup.sh` | VM (cron) | Dump til `backups/`, siste dump per dag i `backups/daily/`, rydder gamle filer, laster opp til GCS |
 | `pull-backups.sh` | Lokal PC (cron) | Henter `backups/` fra VM-en med rsync over ssh |
 | `restore.sh` | VM / ny VM / lokal PC | Restorer en dump inn i `mongodb`-tjenesten |
-| `status.sh` | Kalles av `backup.sh` og `restore.sh` | Skriver `status/system.json` som GUI-et viser |
+| `status.sh` | systemd-timer, `backup.sh`, `restore.sh` | Skriver `status/system.json` som GUI-et viser |
+| `install-status-timer.sh` | VM (én gang) | Installerer timer som kjører `status.sh` hvert 30. sekund |
 
 ### 1. Backup på VM-en hvert 5. minutt
 
@@ -216,6 +217,17 @@ Fila inneholder ingen personopplysninger eller hemmeligheter. Format: se issue #
   **Sett `INSTANCE_ROLE=standby` på en reserveinstans** (f.eks. lokal PC etter restore).
 - `restore.sh` lagrer hvilken fil som ble restoret i databasen `deploy_system`, collection `restores`.
 - Oppdatere manuelt: `scripts/status.sh`
+
+`backup.sh` oppdaterer fila hvert 5. minutt. For at systemsiden skal være ferskere (tjeneste nede,
+container restartet), installer en systemd-timer som oppdaterer fila hvert 30. sekund:
+
+```Shell
+scripts/install-status-timer.sh          # hvert 30. sekund (spør om sudo én gang for "linger")
+scripts/install-status-timer.sh 15       # annet intervall
+scripts/install-status-timer.sh --remove # fjerne
+systemctl --user list-timers langrenn-status.timer   # sjekk at den går
+journalctl --user -u langrenn-status.service         # logg
+```
 
 ### Anbefalt i tillegg
 

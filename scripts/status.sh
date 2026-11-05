@@ -4,7 +4,7 @@
 # The GUIs read this file (mounted read-only). Format: see issue #13.
 # Contains no personal data or secrets: only names, counts, sizes and timestamps.
 #
-#   scripts/status.sh                                     refresh (also run by restore.sh)
+#   scripts/status.sh                                     refresh (systemd timer every 30 s, restore.sh)
 #   scripts/status.sh backup-ok <file> <seconds> <upload>   called by backup.sh, upload: ok|failed|disabled
 #   scripts/status.sh backup-failed <message>               called by backup.sh
 
@@ -18,6 +18,14 @@ STATUS_DIR=status
 mkdir -p "$STATUS_DIR"
 if [[ ! -w $STATUS_DIR ]]; then
     log "ERROR $STATUS_DIR/ is not writable (created by docker as root?): sudo chown $(id -un) $STATUS_DIR"
+    exit 1
+fi
+
+# One writer at a time: a periodic refresh must not overwrite a backup result
+# written at the same moment (the file is read, updated and written back).
+exec 8>"$STATUS_DIR/.lock"
+if ! flock -w 60 8; then
+    log "ERROR timed out waiting for $STATUS_DIR/.lock"
     exit 1
 fi
 
