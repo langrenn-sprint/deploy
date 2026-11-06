@@ -223,7 +223,7 @@ services:
       - GOOGLE_STORAGE_BUCKET=${GOOGLE_STORAGE_BUCKET}
       - GOOGLE_STORAGE_SERVER=${GOOGLE_STORAGE_SERVER}
   mongodb:
-    image: mongo:7-jammy
+    image: mongo:8.0-noble
     ports:
       - 127.0.0.1:27017:27017 # only reachable from the VM itself, never from the internet
     volumes:

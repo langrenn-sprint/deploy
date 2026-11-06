@@ -107,6 +107,31 @@ docker compose logs -f event-service-gui  # feil ved oppstart
 scripts/status.sh                         # oppdaterer systemsiden med nytt image med en gang
 ```
 
+## Oppgradere MongoDB fra 7 til 8.0
+
+Gjøres én gang per instans, når ingen løp pågår. Vi starter med en tom database og restorer siste
+backup (se "Backup" under). Den gamle datakatalogen beholdes til alt virker.
+
+```Shell
+git pull                                  # docker-compose.yml med mongo:8.0-noble
+scripts/backup.sh                         # fersk backup fra MongoDB 7
+docker compose down
+mv data/db data/db-mongo7                 # tom datakatalog for MongoDB 8.0
+docker compose pull mongodb
+scripts/restore.sh backups/mongo_<YYYYmmdd_HHMMSS>.archive.gz   # den du nettopp tok
+docker compose up -d
+```
+
+Sjekk at GUI-ene viser dataene, og at `scripts/backup.sh` fortsatt virker. Deretter kan `data/db-mongo7`
+slettes (filene eies av containeren: `docker run --rm -v "$PWD/data:/d" alpine rm -rf /d/db-mongo7`).
+
+Tilbake til 7: sett `image: mongo:7-jammy`, `docker compose down`, `mv data/db data/db-mongo8`,
+`mv data/db-mongo7 data/db` og `docker compose up -d`. Data som er lagt inn etter oppgraderingen
+er bare med i backupene fra MongoDB 8.0.
+
+Uten restore (bare nytt image på den gamle datakatalogen) virker også: MongoDB 8.0 starter på data fra 7.0
+og kjører videre med `featureCompatibilityVersion` 7.0. Med restore-varianten over blir alt 8.0 med en gang.
+
 ## Sette opp DNS og SSL (Https) 
 Hint: bruk copilot for å få CLI kommandoer
 1. DNS entry settes opp hos ISP. Må peke på en public IP på serveren.
