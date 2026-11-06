@@ -22,6 +22,7 @@ echo "FERNET_KEY=$(python3 -c 'import base64, os; print(base64.urlsafe_b64encode
 set -a
 source .env
 set +a
+touch error.log  # tjenestene skriver feil hit; filen må finnes før første start, se "Feillogg"
 docker compose pull
 docker compose up &
 docker compose up photo-service race-service event-service competition-format-service user-service mongodb photo-service-gui integration-service video-service-capture
@@ -148,6 +149,20 @@ docker compose down
 
 ```Shell
 docker system prune -a --volumes
+```
+
+## Feillogg
+result-service-gui, event-service-gui og integration-service skriver feil til `error.log` i deploy-folderen (bind-mount i `docker-compose.yml`). Filen må finnes før første `docker compose up`: mangler den, lager Docker en *mappe* med navnet `error.log`, og tjenestene får ikke skrevet loggen. Lag den med `touch error.log`, som i oppsettet over.
+
+Filen er ikke i git (`.gitignore`), fordi loggen kan inneholde personopplysninger, f.eks. navn og brukernavn. Den skal ikke sjekkes inn.
+
+**Instanser satt opp før dette:** `error.log` lå i git før, og har lokale endringer, så `git pull` stopper. Flytt loggen til side mens du henter, så beholdes innholdet og tjenestene skriver videre uten omstart:
+
+```Shell
+mv error.log error.log.keep
+git checkout -- error.log
+git pull
+mv error.log.keep error.log
 ```
 
 ## Miljøvariable
