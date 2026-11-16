@@ -91,7 +91,8 @@ docker compose up -d --remove-orphans   # starter event-service-gui på nytt og 
 
 - **nginx:** trafikk på port 443 gikk til result-service-gui på port 8090. Den må nå gå til
   event-service-gui (port 8081 på instanser med https, se "Sette opp DNS og SSL"). Ellers gir
-  nettsiden på port 443 feil (502 fra nginx), fordi ingenting svarer på port 8090.
+  nettsiden på port 443 feil (502 fra nginx), fordi ingenting svarer på port 8090. Port 8080, som
+  gikk til event-service-gui, skal nå sende videre til https på port 443 (samme sted).
 - **Lenker og bokmerker** til resultat-GUI-et (f.eks. `/live?event_id=…` og `/resultat?event_id=…`)
   har samme sti i event-service-gui, så de virker når nginx peker dit.
 
@@ -136,7 +137,14 @@ Hint: bruk copilot for å få CLI kommandoer
 4. Lag Nginx Configuration Filer med følgende config:
    HTTP trafikk på port 80 (default) skal sendes til port 443 (tvinge HTTPS)
    Trafikk på port 443 skal sendes til backend på port 8081 (event-service-gui - tjenesten)
-   Trafikk på port 8080 kan også sendes til backend på port 8081, så gamle lenker til port 8080 virker
+   Port 8080 (den gamle adressen til event-service-gui) skal sende videre (redirect) til https på
+   port 443 med samme sti, så gamle lenker virker. Ikke send den rett til backend på port 8081: kommer
+   forespørselen over http, sender ikke nettleseren sesjons-cookien med `SESSION_COOKIE_SECURE=true`,
+   og innlogging virker ikke (se `SESSION_COOKIE_SECURE` under). Behold `listen`-linjen som den er
+   (med `ssl` og sertifikat hvis porten bruker https), og bytt ut `proxy_pass` med:
+   ```nginx
+   return 301 https://$host$request_uri;
+   ```
 5. Valider config og restart Nginx
 6. Endre i docker compose filen slik at event-service-gui er kjører på port 8081 (ikke 8080)
 7. Sett `SESSION_COOKIE_SECURE=true` i `.env` og kjør `docker compose up -d event-service-gui`
