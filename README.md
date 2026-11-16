@@ -13,16 +13,20 @@ sudo apt-get update
 curl -sSL https://get.docker.com | sh
 git clone https://github.com/langrenn-sprint/deploy.git # uten sudo: backup- og status-skriptene må kunne skrive i folderen
 cd deploy
-# copy .env file og secrets (inkl GOOGLE_APPLICATION_CREDENTIALS)
 sudo usermod -aG docker $USER #deretter logge ut og inn igjen
-# secrets og konfigurasjon
-# opprette en .env fil med miljøvariable, se under
-# lag en egen FERNET_KEY for denne instansen (se "Miljøvariable"), aldri bruk en nøkkel fra eksempler:
-echo "FERNET_KEY=$(python3 -c 'import base64, os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())')" >> .env
+# secrets og konfigurasjon, se "Miljøvariable"
+cp .env.example .env && chmod 600 .env
+# lag egne hemmeligheter for denne instansen, aldri bruk verdier fra eksempler:
+sed -i "s|^JWT_SECRET=.*|JWT_SECRET=$(openssl rand -hex 32)|" .env
+sed -i "s|^DB_PASSWORD=.*|DB_PASSWORD=$(openssl rand -hex 16)|" .env
+sed -i "s|^FERNET_KEY=.*|FERNET_KEY=$(python3 -c 'import base64, os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())')|" .env
+vim .env  # ADMIN_PASSWORD fra passordhvelvet, INSTANCE_NAME/INSTANCE_ROLE, osv.
+# kopier inn application_default_credentials.json (GOOGLE_APPLICATION_CREDENTIALS), chmod 600
+touch error.log  # tjenestene skriver feil hit; filen må finnes før første start, se "Feillogg"
+scripts/check-env.sh  # skal gi en OK-linje
 set -a
 source .env
 set +a
-touch error.log  # tjenestene skriver feil hit; filen må finnes før første start, se "Feillogg"
 docker compose pull
 docker compose up &
 docker compose up photo-service race-service event-service competition-format-service user-service mongodb photo-service-gui integration-service video-service-capture
@@ -195,31 +199,24 @@ mv error.log.keep error.log
 
 ## Miljøvariable
 
-Du må sette opp ei .env fil med miljøvariable. Eksempel:
+Du må sette opp ei `.env` fil med miljøvariable. Mal med alle variable: [`.env.example`](.env.example).
 
 ```Shell
-JWT_SECRET=secret
-ADMIN_USERNAME=admin
-ADMIN_PASSWORD=password
-GOOGLE_APPLICATION_CREDENTIALS="application_default_credentials.json"
-DB_USER=admin
-DB_PASSWORD=password
-ERROR_FILE=error.log
-FERNET_KEY=<generer, se under>
-JWT_EXP_DELTA_SECONDS=3600        # levetid for token i sekunder (1 t), fornyes for aktive brukere, se under
-JWT_MAX_SESSION_SECONDS=86400     # maks lengde på en innlogging (24 t), se under
-SESSION_COOKIE_SECURE=true        # bare på instanser bak https, se under
-LOGGING_LEVEL=INFO
-GOOGLE_APPLICATION_CREDENTIALS="application_default_credentials.json"
-GOOGLE_CLOUD_PROJECT=sigma-celerity-257719
-GOOGLE_STORAGE_BUCKET=langrenn-sprint
-GOOGLE_STORAGE_SERVER=https://storage.googleapis.com
-RACE_DURATION_ESTIMATE=300
-RACE_TIME_DEVIATION_ALLOWED=600
-LOCAL_PHOTO_DIRECTORY=/home/heming/github/deploy/files
-INSTANCE_NAME="UpCloud prod"  # vises i GUI, se "Systemstatus" under
-INSTANCE_ROLE=production      # production | standby | test
+cp .env.example .env && chmod 600 .env   # fyll inn, se "Slik går du fram" over
+scripts/check-env.sh                     # sjekk: skal gi en OK-linje
 ```
+
+`.env` er ikke i git og tas ikke med i backupene: den inneholder alle hemmelighetene. En ny instans
+eller reserveinstans trenger ikke en kopi av `.env` fra produksjon:
+
+- `JWT_SECRET`, `FERNET_KEY`: lag nye (alle må logge inn på nytt, det skjer uansett ved bytte av instans).
+- `DB_USER`, `DB_PASSWORD`: lag nye, brukerne i databasen restores ikke (se [Restore](#restore)).
+- `ADMIN_PASSWORD` og `application_default_credentials.json`: hentes fra passordhvelvet / GCP, ikke fra backup.
+
+`scripts/check-env.sh` sjekker at alle variable som `docker-compose.yml` trenger er satt, at hemmeligheter
+ikke er plassholdere eller eksempelverdier, at `FERNET_KEY` er gyldig, at filer og mapper som mountes finnes,
+og at `.env` bare kan leses av eieren. Den viser bare navn, aldri verdier. `restore.sh` kjører den først.
+Legges det til en ny variabel i `docker-compose.yml`, skal den også inn i `.env.example`.
 
 **`FERNET_KEY`** krypterer sesjons-cookien i GUI-et. Lag en egen nøkkel for hver instans, og del den aldri
 (ikke i git, ikke i README). En nøkkel som har stått i koden eller her er offentlig: da kan hvem som helst
@@ -228,7 +225,7 @@ lage en gyldig innlogging-cookie. Ny nøkkel logger ut alle én gang.
 Ny instans: lag nøkkelen og legg den rett inn i `.env`:
 
 ```Shell
-echo "FERNET_KEY=$(python3 -c 'import base64, os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())')" >> .env
+sed -i "s|^FERNET_KEY=.*|FERNET_KEY=$(python3 -c 'import base64, os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())')|" .env
 ```
 
 Bytte nøkkel på en instans som kjører (gjør det utenom løp, alle logges ut én gang):
@@ -238,8 +235,8 @@ Bytte nøkkel på en instans som kjører (gjør det utenom løp, alle logges ut 
 python3 -c 'import base64, os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())'
 # 2. erstatt verdien i .env:  FERNET_KEY=<ny nøkkel>
 vim .env
-# 3. sjekk at den er satt (skal vise 1); mangler den, starter ikke GUI-et
-grep -c '^FERNET_KEY=.\+' .env
+# 3. sjekk at den er gyldig; mangler den, starter ikke GUI-et
+scripts/check-env.sh
 # 4. start GUI-et på nytt med ny nøkkel
 docker compose up -d event-service-gui
 ```
@@ -272,6 +269,7 @@ Skript i `scripts/`:
 | `backup.sh` | VM (cron) | Dump til `backups/`, siste dump per dag i `backups/daily/`, rydder gamle filer, laster opp til GCS |
 | `pull-backups.sh` | Lokal PC (cron) | Henter `backups/` fra VM-en med rsync over ssh |
 | `restore.sh` | VM / ny VM / lokal PC | Restorer en dump inn i `mongodb`-tjenesten |
+| `check-env.sh` | VM / ny VM / lokal PC, `restore.sh` | Sjekker `.env` (se [Miljøvariable](#miljøvariable)) |
 | `status.sh` | systemd-timer, `backup.sh`, `restore.sh` | Skriver `status/system.json` som GUI-et viser |
 | `install-status-timer.sh` | VM (én gang) | Installerer timer som kjører `status.sh` hvert 30. sekund |
 
@@ -328,9 +326,11 @@ Filene havner i `~/langrenn-sprint-backups` (dumper i 7 dager, daglige beholdes)
 
 ### Restore
 
-På en ny VM eller lokal PC: klon repoet, legg inn `.env`, og kjør:
+På en ny VM eller lokal PC: klon repoet, lag `.env` fra `.env.example` (se [Miljøvariable](#miljøvariable),
+sett `INSTANCE_ROLE=standby`), og kjør:
 
 ```Shell
+scripts/check-env.sh   # restore.sh kjører den også, og stopper ved feil
 # hent en dump, f.eks. fra GCS: gcloud storage cp gs://<backup-bucket>/mongo/<fil> backups/
 scripts/restore.sh backups/mongo_<YYYYmmdd_HHMMSS>.archive.gz
 docker compose up -d

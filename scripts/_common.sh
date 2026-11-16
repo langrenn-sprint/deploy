@@ -10,7 +10,13 @@ env_get() {
         return
     fi
     val=$(grep -E "^${key}=" .env 2>/dev/null | tail -n1 | cut -d= -f2- || true)
-    val=${val%\"}; val=${val#\"}; val=${val%\'}; val=${val#\'}
+    # Same rules as docker compose: quoted value up to the closing quote,
+    # else drop an inline " # comment" and trailing spaces.
+    case $val in
+        \"*) val=${val#\"}; val=${val%%\"*} ;;
+        \'*) val=${val#\'}; val=${val%%\'*} ;;
+        *) val=$(sed -E 's/[[:space:]]+#.*$//; s/[[:space:]]+$//' <<<"$val") ;;
+    esac
     printf '%s' "${val:-$default}"
 }
 
