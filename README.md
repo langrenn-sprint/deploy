@@ -71,9 +71,29 @@ sudo chmod -R 777 files
 Starte opp minimum alle services
 ```Shell
 docker compose pull && docker compose up -d # Henter siste versjon av containere og starter dem
-docker compose up race-service competition-format-service photo-service user-service event-service mongodb event-service-gui result-service-gui integration-service # starte tjenester individuelt
+docker compose up race-service competition-format-service photo-service user-service event-service mongodb event-service-gui integration-service # starte tjenester individuelt
 
 ```
+
+## Overgang fra result-service-gui (én GUI)
+
+result-service-gui er slått sammen med event-service-gui (langrenn-sprint/event-service-gui#227), og
+repoet er arkivert. Resultater, live, startlister, tidtaking og bilder ligger nå i event-service-gui, og
+`docker-compose.yml` har ikke lenger tjenesten `result-service-gui` (port 8090).
+
+På instanser som er satt opp før dette:
+
+```Shell
+git pull
+docker compose pull event-service-gui
+docker compose up -d --remove-orphans   # starter event-service-gui på nytt og stopper result-service-gui
+```
+
+- **nginx:** trafikk på port 443 gikk til result-service-gui på port 8090. Den må nå gå til
+  event-service-gui (port 8081 på instanser med https, se "Sette opp DNS og SSL"). Ellers gir
+  nettsiden på port 443 feil (502 fra nginx), fordi ingenting svarer på port 8090.
+- **Lenker og bokmerker** til resultat-GUI-et (f.eks. `/live?event_id=…` og `/resultat?event_id=…`)
+  har samme sti i event-service-gui, så de virker når nginx peker dit.
 
 ## Oppdatere én tjeneste til nytt image
 
@@ -115,11 +135,11 @@ Hint: bruk copilot for å få CLI kommandoer
 3. Generere sertifikat med certbot
 4. Lag Nginx Configuration Filer med følgende config:
    HTTP trafikk på port 80 (default) skal sendes til port 443 (tvinge HTTPS)
-   Trafikk på port 443 skal sendes til backend på port 8090 (result-service-gui - tjenesten)
-   Trafikk på port 8080 skal sendes til backend på port 8081 (event-service-gui - tjenesten)
+   Trafikk på port 443 skal sendes til backend på port 8081 (event-service-gui - tjenesten)
+   Trafikk på port 8080 kan også sendes til backend på port 8081, så gamle lenker til port 8080 virker
 5. Valider config og restart Nginx
 6. Endre i docker compose filen slik at event-service-gui er kjører på port 8081 (ikke 8080)
-7. Sett `SESSION_COOKIE_SECURE=true` i `.env` og kjør `docker compose up -d event-service-gui result-service-gui`
+7. Sett `SESSION_COOKIE_SECURE=true` i `.env` og kjør `docker compose up -d event-service-gui`
 
 ## Monitorere logger
 
@@ -152,7 +172,7 @@ docker system prune -a --volumes
 ```
 
 ## Feillogg
-result-service-gui, event-service-gui og integration-service skriver feil til `error.log` i deploy-folderen (bind-mount i `docker-compose.yml`). Filen må finnes før første `docker compose up`: mangler den, lager Docker en *mappe* med navnet `error.log`, og tjenestene får ikke skrevet loggen. Lag den med `touch error.log`, som i oppsettet over.
+event-service-gui og integration-service skriver feil til `error.log` i deploy-folderen (bind-mount i `docker-compose.yml`). Filen må finnes før første `docker compose up`: mangler den, lager Docker en *mappe* med navnet `error.log`, og tjenestene får ikke skrevet loggen. Lag den med `touch error.log`, som i oppsettet over.
 
 Filen er ikke i git (`.gitignore`), fordi loggen kan inneholde personopplysninger, f.eks. navn og brukernavn. Den skal ikke sjekkes inn.
 
@@ -193,7 +213,7 @@ INSTANCE_NAME="UpCloud prod"  # vises i GUI, se "Systemstatus" under
 INSTANCE_ROLE=production      # production | standby | test
 ```
 
-**`FERNET_KEY`** krypterer sesjons-cookien i GUI-ene. Lag en egen nøkkel for hver instans, og del den aldri
+**`FERNET_KEY`** krypterer sesjons-cookien i GUI-et. Lag en egen nøkkel for hver instans, og del den aldri
 (ikke i git, ikke i README). En nøkkel som har stått i koden eller her er offentlig: da kan hvem som helst
 lage en gyldig innlogging-cookie. Ny nøkkel logger ut alle én gang.
 
@@ -210,26 +230,26 @@ Bytte nøkkel på en instans som kjører (gjør det utenom løp, alle logges ut 
 python3 -c 'import base64, os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())'
 # 2. erstatt verdien i .env:  FERNET_KEY=<ny nøkkel>
 vim .env
-# 3. sjekk at den er satt (skal vise 1); mangler den, starter ikke GUI-ene
+# 3. sjekk at den er satt (skal vise 1); mangler den, starter ikke GUI-et
 grep -c '^FERNET_KEY=.\+' .env
-# 4. start GUI-ene på nytt med ny nøkkel
-docker compose up -d event-service-gui result-service-gui
+# 4. start GUI-et på nytt med ny nøkkel
+docker compose up -d event-service-gui
 ```
 
-**`JWT_EXP_DELTA_SECONDS`** er hvor lenge et token gjelder. GUI-ene fornyer tokenet når halve levetiden
+**`JWT_EXP_DELTA_SECONDS`** er hvor lenge et token gjelder. GUI-et fornyer tokenet når halve levetiden
 har gått, så en aktiv bruker holdes innlogget. En innlogging uten aktivitet utløper etter denne tiden.
 3600 (1 time) er passe. Etter endring: `docker compose up -d user-service` (gjelder nye token).
 
 **`JWT_MAX_SESSION_SECONDS`** er maks lengde på en innlogging, regnet fra innlogging med passord. Etter
-dette avviser user-service fornyelse, og brukeren må logge inn på nytt. GUI-ene bruker samme verdi som
+dette avviser user-service fornyelse, og brukeren må logge inn på nytt. GUI-et bruker samme verdi som
 levetid (`max_age`) på sesjons-cookien, så innloggingen overlever at nettleseren lukkes. Standard 86400
-(24 t). Etter endring: `docker compose up -d user-service event-service-gui result-service-gui`.
+(24 t). Etter endring: `docker compose up -d user-service event-service-gui`.
 
 **`SESSION_COOKIE_SECURE`** gjør at nettleseren bare sender sesjons-cookien over https. Sett `true` på
-instanser der GUI-ene nås via https (nginx med sertifikat, se "Sette opp DNS og SSL"). La den være
+instanser der GUI-et nås via https (nginx med sertifikat, se "Sette opp DNS og SSL"). La den være
 `false` (standard) på instanser som brukes over vanlig http, f.eks. en reserve-PC på lokalt nett: med
 `true` der lagrer ikke nettleseren cookien, og innlogging virker ikke (ingen feilmelding, man havner
-bare på innloggingssiden igjen). Etter endring: `docker compose up -d event-service-gui result-service-gui`.
+bare på innloggingssiden igjen). Etter endring: `docker compose up -d event-service-gui`.
 
 ## Backup (uten nedetid)
 
@@ -320,8 +340,8 @@ restoret fra, MongoDB-versjon, antall dokumenter per collection, ledig disk og m
 byggetidspunkt, minne- og CPU-bruk for hver tjeneste (fra `docker inspect` og `docker stats`).
 Fila inneholder ingen personopplysninger eller hemmeligheter. Format: se issue #13.
 
-- `status/` mountes read-only inn i `event-service-gui` og `result-service-gui` (`SYSTEM_STATUS_FILE`).
-- `INSTANCE_NAME` og `INSTANCE_ROLE` i `.env` sendes til GUI-ene. Når rollen ikke er `production`,
+- `status/` mountes read-only inn i `event-service-gui` (`SYSTEM_STATUS_FILE`).
+- `INSTANCE_NAME` og `INSTANCE_ROLE` i `.env` sendes til GUI-et. Når rollen ikke er `production`,
   skal GUI-et vise et tydelig banner (langrenn-sprint/event-service-gui#198).
   **Sett `INSTANCE_ROLE=standby` på en reserveinstans** (f.eks. lokal PC etter restore).
 - `restore.sh` lagrer hvilken fil som ble restoret i databasen `deploy_system`, collection `restores`.
