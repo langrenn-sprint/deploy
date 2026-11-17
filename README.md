@@ -184,7 +184,7 @@ docker system prune -a --volumes
 ```
 
 ## Feillogg
-event-service-gui og integration-service skriver feil til `error.log` i deploy-folderen (bind-mount i `docker-compose.yml`). Filen må finnes før første `docker compose up`: mangler den, lager Docker en *mappe* med navnet `error.log`, og tjenestene får ikke skrevet loggen. Lag den med `touch error.log`, som i oppsettet over.
+event-service-gui og integration-service skriver feil til `error.log` i deploy-folderen (bind-mount i `docker-compose.yml`). Filen må finnes før første `docker compose up`, ellers stopper `docker compose up` med `bind source path does not exist` (`create_host_path: false` i `docker-compose.yml`; uten den ville Docker laget en tom *mappe* med navnet `error.log`). Lag den med `touch error.log`, som i oppsettet over.
 
 Filen er ikke i git (`.gitignore`), fordi loggen kan inneholde personopplysninger, f.eks. navn og brukernavn. Den skal ikke sjekkes inn.
 
@@ -217,6 +217,14 @@ eller reserveinstans trenger ikke en kopi av `.env` fra produksjon:
 ikke er plassholdere eller eksempelverdier, at `FERNET_KEY` er gyldig, at filer og mapper som mountes finnes,
 og at `.env` bare kan leses av eieren. Den viser bare navn, aldri verdier. `restore.sh` kjører den først.
 Legges det til en ny variabel i `docker-compose.yml`, skal den også inn i `.env.example`.
+
+`docker compose up` stopper også selv på det verste, uten `check-env.sh`:
+- påkrevde variable står som `${VAR:?}` i `docker-compose.yml`; mangler en eller er tom, stopper compose med
+  `required variable VAR is missing a value` (bare den første, `check-env.sh` viser alle)
+- bind-mounts har `create_host_path: false`; mangler filen eller mappen, stopper compose med
+  `bind source path does not exist` i stedet for å lage en tom mappe
+- nye påkrevde variable skrives `${VAR:?}`, og nye bind-mounts får `create_host_path: false`
+  (mapper legges også i `DIR_MOUNTS` i `check-env.sh`)
 
 **`FERNET_KEY`** krypterer sesjons-cookien i GUI-et. Lag en egen nøkkel for hver instans, og del den aldri
 (ikke i git, ikke i README). En nøkkel som har stått i koden eller her er offentlig: da kan hvem som helst

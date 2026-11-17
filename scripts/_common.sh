@@ -5,14 +5,16 @@ log() { printf '%s %s\n' "$(date -Is)" "$*"; }
 
 # Variables as docker compose resolves them for docker-compose.yml: the process
 # environment over .env, with compose's own handling of quotes, escapes, inline
-# comments and ${VAR} interpolation. Loaded once when this file is sourced
+# comments and ${VAR} interpolation inside .env. --no-interpolate skips only
+# docker-compose.yml, so a missing ${VAR:?} there does not stop the scripts.
+# Loaded once when this file is sourced
 # (every script cds to the repo root first). compose's error output is dropped:
 # it can quote values from .env.
 declare -gA ENV_RESOLVED=()
 export ENV_LOADED=false  # read by check-env.sh
 env_load() {
     local out line
-    out=$(docker compose config --environment 2>/dev/null) || return 1
+    out=$(docker compose config --environment --no-interpolate 2>/dev/null) || return 1
     ENV_RESOLVED=()
     while IFS= read -r line; do
         [[ $line == *=* ]] && ENV_RESOLVED[${line%%=*}]=${line#*=}

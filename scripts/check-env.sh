@@ -6,7 +6,8 @@
 #   scripts/check-env.sh     # exit 0: OK (warnings allowed), 1: errors
 #
 # Checks:
-#   - every ${VAR} without a default in docker-compose.yml is set
+#   - every required ${VAR:?} in docker-compose.yml is set (compose stops at the first
+#     missing one, this lists them all)
 #   Values are read as docker compose resolves them (shell environment over .env,
 #   quotes and ${VAR} interpolation), so DB_PASSWORD=${UNSET} counts as empty.
 #   - secrets are not empty, a placeholder from .env.example or a known example value
@@ -54,11 +55,11 @@ if [[ -f .env.example ]]; then
     [[ -z $missing ]] || warn "in .env.example but not in .env: $missing"
 fi
 
-# 1. Variables docker-compose.yml uses without a default.
+# 1. Variables docker-compose.yml requires: ${VAR:?} (or ${VAR} without a default).
 unset_keys=''
-for key in $(grep -oE '\$\{[A-Z0-9_]+\}' docker-compose.yml | tr -dc 'A-Z0-9_\n' | sort -u); do
+while read -r key; do
     [[ -n $(env_get "$key") ]] || { error "$key is not set"; unset_keys+=" $key "; }
-done
+done < <(grep -oE '\$\{[A-Z0-9_]+(:\?[^}]*)?\}' docker-compose.yml | sed -E 's/^.\{([A-Z0-9_]+).*/\1/' | sort -u)
 
 # 2. Secrets: no placeholders or example values.
 for key in JWT_SECRET FERNET_KEY DB_PASSWORD ADMIN_PASSWORD; do
@@ -99,12 +100,12 @@ done
 # 4. Bind-mounted files and folders (long syntax "source:" in docker-compose.yml).
 # Mounts listed here must be folders, all others files. Add new folder mounts here.
 # shellcheck disable=SC2016  # matched literally against docker-compose.yml
-DIR_MOUNTS=('./status' '${LOCAL_PHOTO_DIRECTORY}')
+DIR_MOUNTS=('./status' '${LOCAL_PHOTO_DIRECTORY:?}')
 while read -r line; do
     # Replace each ${VAR} once, left to right. Resolved values are not scanned
     # again, so a value that itself contains ${...} cannot loop.
     src='' rest=$line
-    while [[ $rest =~ \$\{([A-Z0-9_]+)\} ]]; do
+    while [[ $rest =~ \$\{([A-Z0-9_]+)(:\?[^\}]*)?\} ]]; do
         src+=${rest%%"${BASH_REMATCH[0]}"*}$(env_get "${BASH_REMATCH[1]}")
         rest=${rest#*"${BASH_REMATCH[0]}"}
     done
@@ -131,6 +132,11 @@ if [[ -n $(env_get BACKUP_GCS_BUCKET) ]]; then
     else
         error "BACKUP_GCS_BUCKET is set but $creds (BACKUP_GCS_CREDENTIALS) does not exist"
     fi
+fi
+
+# 6. Anything else docker compose rejects. Its output is dropped: it can quote values.
+if ((errors == 0)) && ! docker compose config -q >/dev/null 2>&1; then
+    error "docker compose config fails: run docker compose config -q (it may print values)"
 fi
 
 if ((errors > 0)); then

@@ -7,21 +7,25 @@ services:
       - type: bind
         source: ./error.log
         target: /app/error.log
+        bind:
+          create_host_path: false  # fail instead of creating an empty folder
       - type: bind
         source: ./status
         target: /app/status
         read_only: true
+        bind:
+          create_host_path: false  # fail instead of creating an empty folder
     environment:
-      - JWT_SECRET=${JWT_SECRET}
-      - ADMIN_USERNAME=${ADMIN_USERNAME}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET:?}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:?}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?}
       - HOST_PORT=8080
       - COMPETITION_FORMAT_HOST_SERVER=competition-format-service
       - COMPETITION_FORMAT_HOST_PORT=8000
       - EVENTS_HOST_SERVER=event-service
       - EVENTS_HOST_PORT=8000
       - ERROR_FILE=error.log
-      - LOGGING_LEVEL=${LOGGING_LEVEL}
+      - LOGGING_LEVEL=${LOGGING_LEVEL:?}
       - PHOTOS_HOST_SERVER=photo-service
       - PHOTOS_HOST_PORT=8000
       - RACE_HOST_SERVER=race-service
@@ -46,18 +50,18 @@ services:
     environment:
       - HOST_SERVER=event-service
       - HOST_PORT=8000
-      - JWT_SECRET=${JWT_SECRET}
-      - ADMIN_USERNAME=${ADMIN_USERNAME}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET:?}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:?}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?}
       - COMPETITION_FORMAT_HOST_SERVER=competition-format-service
       - COMPETITION_FORMAT_HOST_PORT=8000
       - USERS_HOST_SERVER=user-service
       - USERS_HOST_PORT=8000
-      - LOGGING_LEVEL=${LOGGING_LEVEL}
+      - LOGGING_LEVEL=${LOGGING_LEVEL:?}
       - DB_HOST=mongodb
       - DB_PORT=27017
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_USER=${DB_USER:?}
+      - DB_PASSWORD=${DB_PASSWORD:?}
     depends_on:
       - "user-service"
       - "mongodb"
@@ -68,20 +72,20 @@ services:
     environment:
       - HOST_SERVER=race-service
       - HOST_PORT=8000
-      - JWT_SECRET=${JWT_SECRET}
-      - ADMIN_USERNAME=${ADMIN_USERNAME}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET:?}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:?}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?}
       - COMPETITION_FORMAT_HOST_SERVER=competition-format-service
       - COMPETITION_FORMAT_HOST_PORT=8000
       - EVENTS_HOST_SERVER=event-service
       - EVENTS_HOST_PORT=8000
       - USERS_HOST_SERVER=user-service
       - USERS_HOST_PORT=8000
-      - LOGGING_LEVEL=${LOGGING_LEVEL}
+      - LOGGING_LEVEL=${LOGGING_LEVEL:?}
       - DB_HOST=mongodb
       - DB_PORT=27017
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_USER=${DB_USER:?}
+      - DB_PASSWORD=${DB_PASSWORD:?}
     depends_on:
       - "event-service"
       - "user-service"
@@ -93,16 +97,16 @@ services:
     environment:
       - HOST_SERVER=photo-service
       - HOST_PORT=8000
-      - JWT_SECRET=${JWT_SECRET}
-      - ADMIN_USERNAME=${ADMIN_USERNAME}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET:?}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:?}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?}
       - USERS_HOST_SERVER=user-service
       - USERS_HOST_PORT=8000
-      - LOGGING_LEVEL=${LOGGING_LEVEL}
+      - LOGGING_LEVEL=${LOGGING_LEVEL:?}
       - DB_HOST=mongodb
       - DB_PORT=27017
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_USER=${DB_USER:?}
+      - DB_PASSWORD=${DB_PASSWORD:?}
     depends_on:
       - "user-service"
       - "mongodb"
@@ -113,16 +117,16 @@ services:
     environment:
       - HOST_SERVER=competition-format-service
       - HOST_PORT=8000
-      - ADMIN_USERNAME=${ADMIN_USERNAME}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-      - JWT_SECRET=${JWT_SECRET}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:?}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?}
+      - JWT_SECRET=${JWT_SECRET:?}
       - USERS_HOST_SERVER=user-service
       - USERS_HOST_PORT=8000
       - DB_HOST=mongodb
       - DB_PORT=27017
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - LOGGING_LEVEL=${LOGGING_LEVEL}
+      - DB_USER=${DB_USER:?}
+      - DB_PASSWORD=${DB_PASSWORD:?}
+      - LOGGING_LEVEL=${LOGGING_LEVEL:?}
     depends_on:
       - user-service
       - mongodb
@@ -133,37 +137,45 @@ services:
     environment:
       - HOST_SERVER=user-service
       - HOST_PORT=8000
-      - JWT_EXP_DELTA_SECONDS=${JWT_EXP_DELTA_SECONDS}
+      - JWT_EXP_DELTA_SECONDS=${JWT_EXP_DELTA_SECONDS:?}
       - JWT_MAX_SESSION_SECONDS=${JWT_MAX_SESSION_SECONDS:-86400} # max session length, see README
-      - JWT_SECRET=${JWT_SECRET}
-      - ADMIN_USERNAME=${ADMIN_USERNAME}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-      - LOGGING_LEVEL=${LOGGING_LEVEL}
+      - JWT_SECRET=${JWT_SECRET:?}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:?}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?}
+      - LOGGING_LEVEL=${LOGGING_LEVEL:?}
       - DB_HOST=mongodb
       - DB_PORT=27017
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_USER=${DB_USER:?}
+      - DB_PASSWORD=${DB_PASSWORD:?}
     depends_on:
       - "mongodb"
   integration-service:
     image: ghcr.io/langrenn-sprint/integration-service:latest
     volumes:
       - type: bind
-        source: ${LOCAL_PHOTO_DIRECTORY}
+        source: ${LOCAL_PHOTO_DIRECTORY:?}
         target: /app/integration_service/files
+        bind:
+          create_host_path: false  # fail instead of creating an empty folder
       - type: bind
         source: ./global_settings.json
         target: /app/integration_service/config/global_settings.json
+        bind:
+          create_host_path: false  # fail instead of creating an empty folder
       - type: bind
         source: ./application_default_credentials.json
         target: /app/application_default_credentials.json
+        bind:
+          create_host_path: false  # fail instead of creating an empty folder
       - type: bind
         source: ./error.log
         target: /app/error.log
+        bind:
+          create_host_path: false  # fail instead of creating an empty folder
     environment:
-      - LOGGING_LEVEL=${LOGGING_LEVEL}
-      - ADMIN_USERNAME=${ADMIN_USERNAME}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - LOGGING_LEVEL=${LOGGING_LEVEL:?}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:?}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?}
       - EVENTS_HOST_SERVER=event-service
       - EVENTS_HOST_PORT=8000
       - PHOTOS_HOST_SERVER=photo-service
@@ -172,10 +184,10 @@ services:
       - RACE_HOST_PORT=8000
       - USERS_HOST_SERVER=user-service
       - USERS_HOST_PORT=8000
-      - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
-      - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT}
-      - GOOGLE_STORAGE_BUCKET=${GOOGLE_STORAGE_BUCKET}
-      - GOOGLE_STORAGE_SERVER=${GOOGLE_STORAGE_SERVER}
+      - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS:?}
+      - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT:?}
+      - GOOGLE_STORAGE_BUCKET=${GOOGLE_STORAGE_BUCKET:?}
+      - GOOGLE_STORAGE_SERVER=${GOOGLE_STORAGE_SERVER:?}
   mongodb:
     image: mongo:7-jammy
     ports:
@@ -183,16 +195,16 @@ services:
     volumes:
       - ./data/db:/data/db
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
-      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USER:?}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD:?}
   mongo-express:
     profiles: ["dev"]
     image: mongo-express:latest
     ports:
       - 8081:8081
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=${DB_USER}
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=${DB_PASSWORD}
-      - ME_CONFIG_MONGODB_URL=mongodb://${DB_USER}:${DB_PASSWORD}@mongodb:27017/
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${DB_USER:?}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${DB_PASSWORD:?}
+      - ME_CONFIG_MONGODB_URL=mongodb://${DB_USER:?}:${DB_PASSWORD:?}@mongodb:27017/
     depends_on:
       - "mongodb"
