@@ -1,4 +1,5 @@
 # Shared helpers for backup.sh and restore.sh. Source this file; do not run it.
+# shellcheck shell=bash
 
 log() { printf '%s %s\n' "$(date -Is)" "$*"; }
 
@@ -8,7 +9,7 @@ log() { printf '%s %s\n' "$(date -Is)" "$*"; }
 # (every script cds to the repo root first). compose's error output is dropped:
 # it can quote values from .env.
 declare -gA ENV_RESOLVED=()
-ENV_LOADED=false
+export ENV_LOADED=false  # read by check-env.sh
 env_load() {
     local out line
     out=$(docker compose config --environment 2>/dev/null) || return 1

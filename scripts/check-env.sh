@@ -56,7 +56,7 @@ fi
 
 # 1. Variables docker-compose.yml uses without a default.
 unset_keys=''
-for key in $(grep -oE '\$\{[A-Z0-9_]+\}' docker-compose.yml | tr -d '${}' | sort -u); do
+for key in $(grep -oE '\$\{[A-Z0-9_]+\}' docker-compose.yml | tr -dc 'A-Z0-9_\n' | sort -u); do
     [[ -n $(env_get "$key") ]] || { error "$key is not set"; unset_keys+=" $key "; }
 done
 
@@ -106,7 +106,7 @@ while read -r line; do
         var=${BASH_REMATCH[1]}
         src=${src//\$\{$var\}/$(env_get "$var")}
     done
-    want=file
+    want='file'
     for d in "${DIR_MOUNTS[@]}"; do [[ $line == "$d" ]] && want=folder; done
     if [[ -z $src ]]; then
         error "$line is mounted by docker-compose.yml but is empty"

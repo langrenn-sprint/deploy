@@ -54,6 +54,7 @@ IMAGES_JSON='[]'
 if [[ -n $container_ids ]]; then
     # shellcheck disable=SC2086  # word splitting of the id list is intended
     CONTAINERS_JSON=$(docker inspect $container_ids 2>/dev/null || echo '[]')
+    # shellcheck disable=SC2086  # word splitting of the id list is intended
     image_ids=$(docker inspect --format '{{.Image}}' $container_ids 2>/dev/null | sort -u)
     # shellcheck disable=SC2086
     [[ -n $image_ids ]] && IMAGES_JSON=$(docker image inspect $image_ids 2>/dev/null || echo '[]')
