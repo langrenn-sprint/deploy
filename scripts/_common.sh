@@ -3,6 +3,33 @@
 
 log() { printf '%s %s\n' "$(date -Is)" "$*"; }
 
+# env_file_keys: names defined in .env, one per line. A quoted value that runs
+# over several lines is followed to its closing quote, so its lines are not read as
+# names; those names are printed again with a "+" in front (a multi-line value).
+env_file_keys() {
+    [[ -f .env ]] || return 0
+    awk '
+        q != "" {   # inside a quoted value: look for the closing quote
+            rest = $0
+            if (q == "\"") gsub(/\\./, "", rest)
+            if (index(rest, q)) q = ""
+            next
+        }
+        match($0, /^[ \t]*(export[ \t]+)?[A-Za-z_][A-Za-z0-9_]*[ \t]*=/) {
+            head = substr($0, 1, RLENGTH); val = substr($0, RLENGTH + 1)
+            sub(/^[ \t]*(export[ \t]+)?/, "", head); sub(/[ \t]*=$/, "", head)
+            print head
+            sub(/^[ \t]+/, "", val)
+            c = substr(val, 1, 1)
+            if (c == "\"" || c == "\047") {
+                rest = substr(val, 2)
+                if (c == "\"") gsub(/\\./, "", rest)
+                if (!index(rest, c)) { q = c; print "+" head }
+            }
+        }
+    ' .env
+}
+
 # Variables as docker compose resolves them for docker-compose.yml: the process
 # environment over .env, with compose's own handling of quotes, escapes, inline
 # comments and ${VAR} interpolation inside .env. --no-interpolate skips only
@@ -10,18 +37,43 @@ log() { printf '%s %s\n' "$(date -Is)" "$*"; }
 # Loaded once when this file is sourced
 # (every script cds to the repo root first). compose's error output is dropped:
 # it can quote values from .env.
+#
+# compose prints one NAME=value per line, with line breaks in values as they are,
+# so a value spanning several lines would be cut off, and a following line could
+# look like another variable. Multi-line values are not supported: every line must
+# be a variable from .env or the process environment, each only once. Otherwise the
+# .env variables involved go into ENV_MULTILINE (names only).
 declare -gA ENV_RESOLVED=()
-export ENV_LOADED=false  # read by check-env.sh
+export ENV_LOADED=false ENV_MULTILINE=''  # read by check-env.sh
 env_load() {
-    local out line
+    local out line key name prev='' env_keys proc_keys
     out=$(docker compose config --environment --no-interpolate 2>/dev/null) || return 1
+    env_keys=" $(env_file_keys | tr '\n' ' ') "
+    # names only: newlines in values become \001 so each variable is one line
+    proc_keys=" $(env -0 | tr '\n\0' '\001\n' | sed 's/=.*//' | tr '\n' ' ') "
     ENV_RESOLVED=()
+    ENV_MULTILINE=''
+    for name in $env_keys; do
+        [[ $name == +* ]] && ENV_MULTILINE+=" ${name#+} "
+    done
     while IFS= read -r line; do
-        [[ $line == *=* ]] && ENV_RESOLVED[${line%%=*}]=${line#*=}
+        key=${line%%=*}
+        if [[ $line == *=* && -z ${ENV_RESOLVED[$key]+set} &&
+            ($env_keys == *" $key "* || $proc_keys == *" $key "*) ]]; then
+            ENV_RESOLVED[$key]=${line#*=}
+            prev=$key
+            continue
+        fi
+        # Not a new variable: part of the previous value, or a repeated name.
+        for name in "$prev" "$key"; do
+            [[ $env_keys == *" $name "* && $ENV_MULTILINE != *" $name "* ]] && ENV_MULTILINE+=" $name "
+        done
     done <<<"$out"
+    ENV_MULTILINE=$(tr -s ' ' '\n' <<<"$ENV_MULTILINE" | sed '/^$/d' | sort -u | paste -sd' ' -)
     ENV_LOADED=true
 }
 env_load || log "ERROR docker compose could not read .env or docker-compose.yml (run: docker compose config -q)"
+[[ -z $ENV_MULTILINE ]] || log "WARNING .env has values spanning several lines ($ENV_MULTILINE), values may be wrong"
 
 # env_get KEY [DEFAULT]: resolved value of KEY, else DEFAULT.
 env_get() {

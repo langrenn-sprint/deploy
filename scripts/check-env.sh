@@ -14,6 +14,7 @@
 #   - FERNET_KEY is a valid key (32 bytes, urlsafe base64)
 #   - files and folders that docker-compose.yml bind-mounts exist
 #     (if not, Docker creates an empty folder in their place)
+#   - no value in .env spans several lines (the scripts cannot read those)
 #   - backup settings, .env file permissions, keys in .env.example missing in .env
 
 set -euo pipefail
@@ -44,6 +45,10 @@ fi
 check_private .env
 if [[ $ENV_LOADED != true ]]; then
     error ".env or docker-compose.yml is invalid, see above"
+    exit 1
+fi
+if [[ -n $ENV_MULTILINE ]]; then
+    error "values in .env must be on one line: $ENV_MULTILINE"
     exit 1
 fi
 
