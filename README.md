@@ -226,6 +226,16 @@ Legges det til en ny variabel i `docker-compose.yml`, skal den også inn i `.env
 - nye påkrevde variable skrives `${VAR:?}`, og nye bind-mounts får `create_host_path: false`
   (mapper legges også i `DIR_MOUNTS` i `check-env.sh`)
 
+Skal en variabel kunne mangle, f.eks. `GOOGLE_*` på en lokal PC uten integration-service, gi den en
+standardverdi i `docker-compose.yml` i stedet for `:?`. Da sjekker verken compose eller `check-env.sh` den:
+- `${VAR:-}`: tom hvis den mangler
+- `${VAR:-verdi}`: `verdi` hvis den mangler, f.eks. `${LOGGING_LEVEL:-INFO}`
+
+Endre alle steder variabelen brukes; står den med `:?` ett sted, er den fortsatt påkrevd.
+Compose sjekker alle tjenester, også når du bare starter noen (`docker compose up mongodb` stopper
+også hvis `GOOGLE_STORAGE_SERVER` mangler). Vil du ikke endre filen, sett variabelen til en uviktig
+verdi i `.env`, f.eks. `GOOGLE_STORAGE_SERVER=unused`: compose krever bare at den ikke er tom.
+
 **`FERNET_KEY`** krypterer sesjons-cookien i GUI-et. Lag en egen nøkkel for hver instans, og del den aldri
 (ikke i git, ikke i README). En nøkkel som har stått i koden eller her er offentlig: da kan hvem som helst
 lage en gyldig innlogging-cookie. Ny nøkkel logger ut alle én gang.
