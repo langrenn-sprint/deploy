@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Restore a MongoDB dump made by backup.sh into the mongodb service of this compose project.
-# Works on the VM, on a new VM, or on a local PC (needs this repo + a .env file).
+# Works on the VM, on a new VM, or on a local PC (needs this repo + a .env file,
+# made from .env.example; scripts/check-env.sh runs first and stops on errors).
 #
 #   scripts/restore.sh backups/mongo_20261105_120500.archive.gz
 #   scripts/restore.sh -y <file>     # no confirmation prompt
@@ -25,6 +26,7 @@ cd "$(dirname "$(readlink -f "$0")")/.."
 # shellcheck source=_common.sh
 source scripts/_common.sh
 
+scripts/check-env.sh || { log "ERROR fix .env first, see scripts/check-env.sh"; exit 1; }
 gzip -t "$archive" || { log "ERROR $archive is not a valid gzip archive"; exit 1; }
 
 if ! $yes; then
