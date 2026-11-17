@@ -101,11 +101,14 @@ done
 # shellcheck disable=SC2016  # matched literally against docker-compose.yml
 DIR_MOUNTS=('./status' '${LOCAL_PHOTO_DIRECTORY}')
 while read -r line; do
-    src=$line
-    while [[ $src =~ \$\{([A-Z0-9_]+)\} ]]; do
-        var=${BASH_REMATCH[1]}
-        src=${src//\$\{$var\}/$(env_get "$var")}
+    # Replace each ${VAR} once, left to right. Resolved values are not scanned
+    # again, so a value that itself contains ${...} cannot loop.
+    src='' rest=$line
+    while [[ $rest =~ \$\{([A-Z0-9_]+)\} ]]; do
+        src+=${rest%%"${BASH_REMATCH[0]}"*}$(env_get "${BASH_REMATCH[1]}")
+        rest=${rest#*"${BASH_REMATCH[0]}"}
     done
+    src+=$rest
     want='file'
     for d in "${DIR_MOUNTS[@]}"; do [[ $line == "$d" ]] && want=folder; done
     if [[ -z $src ]]; then
