@@ -94,7 +94,7 @@ case $(env_get SESSION_COOKIE_SECURE false) in
 esac
 for key in JWT_EXP_DELTA_SECONDS JWT_MAX_SESSION_SECONDS; do
     val=$(env_get "$key")
-    [[ -z $val || $val =~ ^[0-9]+$ ]] || error "$key must be a number of seconds"
+    [[ -z $val || $val =~ ^0*[1-9][0-9]*$ ]] || error "$key must be a positive number of seconds"
 done
 
 # 4. Bind-mounted files and folders (long syntax "source:" in docker-compose.yml).
