@@ -2,22 +2,28 @@
 
 log() { printf '%s %s\n' "$(date -Is)" "$*"; }
 
-# env_get KEY [DEFAULT]: value from the process environment, else from .env, else DEFAULT.
+# Variables as docker compose resolves them for docker-compose.yml: the process
+# environment over .env, with compose's own handling of quotes, escapes, inline
+# comments and ${VAR} interpolation. Loaded once when this file is sourced
+# (every script cds to the repo root first). compose's error output is dropped:
+# it can quote values from .env.
+declare -gA ENV_RESOLVED=()
+ENV_LOADED=false
+env_load() {
+    local out line
+    out=$(docker compose config --environment 2>/dev/null) || return 1
+    ENV_RESOLVED=()
+    while IFS= read -r line; do
+        [[ $line == *=* ]] && ENV_RESOLVED[${line%%=*}]=${line#*=}
+    done <<<"$out"
+    ENV_LOADED=true
+}
+env_load || log "ERROR docker compose could not read .env or docker-compose.yml (run: docker compose config -q)"
+
+# env_get KEY [DEFAULT]: resolved value of KEY, else DEFAULT.
 env_get() {
-    local key=$1 default=${2:-} val
-    if [[ -n ${!key:-} ]]; then
-        printf '%s' "${!key}"
-        return
-    fi
-    val=$(grep -E "^${key}=" .env 2>/dev/null | tail -n1 | cut -d= -f2- || true)
-    # Same rules as docker compose: quoted value up to the closing quote,
-    # else drop an inline " # comment" and trailing spaces.
-    case $val in
-        \"*) val=${val#\"}; val=${val%%\"*} ;;
-        \'*) val=${val#\'}; val=${val%%\'*} ;;
-        *) val=$(sed -E 's/[[:space:]]+#.*$//; s/[[:space:]]+$//' <<<"$val") ;;
-    esac
-    printf '%s' "${val:-$default}"
+    local val=${ENV_RESOLVED[$1]:-}
+    printf '%s' "${val:-${2:-}}"
 }
 
 # mongo_tool <tool> [args...]: run mongodump or mongorestore

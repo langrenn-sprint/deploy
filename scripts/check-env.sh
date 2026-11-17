@@ -7,6 +7,8 @@
 #
 # Checks:
 #   - every ${VAR} without a default in docker-compose.yml is set
+#   Values are read as docker compose resolves them (shell environment over .env,
+#   quotes and ${VAR} interpolation), so DB_PASSWORD=${UNSET} counts as empty.
 #   - secrets are not empty, a placeholder from .env.example or a known example value
 #   - FERNET_KEY is a valid key (32 bytes, urlsafe base64)
 #   - files and folders that docker-compose.yml bind-mounts exist
@@ -24,7 +26,8 @@ error() { log "ERROR $*"; errors=$((errors + 1)); }
 warn() { log "WARNING $*"; warnings=$((warnings + 1)); }
 
 # Keys defined in an env file (ignores comments and blank lines).
-env_keys() { grep -oE '^[A-Za-z_][A-Za-z0-9_]*=' "$1" | tr -d = ; }
+# Succeeds with no output for an empty or comments-only file.
+env_keys() { { grep -oE '^[A-Za-z_][A-Za-z0-9_]*=' "$1" || true; } | tr -d = ; }
 
 # Warn if a file is readable by group or others.
 check_private() {
@@ -38,6 +41,10 @@ if [[ ! -f .env ]]; then
     exit 1
 fi
 check_private .env
+if [[ $ENV_LOADED != true ]]; then
+    error ".env or docker-compose.yml is invalid, see above"
+    exit 1
+fi
 
 dups=$(env_keys .env | sort | uniq -d | paste -sd' ' -)
 [[ -z $dups ]] || warn ".env sets these more than once (the last one wins): $dups"
@@ -48,15 +55,16 @@ if [[ -f .env.example ]]; then
 fi
 
 # 1. Variables docker-compose.yml uses without a default.
+unset_keys=''
 for key in $(grep -oE '\$\{[A-Z0-9_]+\}' docker-compose.yml | tr -d '${}' | sort -u); do
-    [[ -n $(env_get "$key") ]] || error "$key is not set"
+    [[ -n $(env_get "$key") ]] || { error "$key is not set"; unset_keys+=" $key "; }
 done
 
 # 2. Secrets: no placeholders or example values.
 for key in JWT_SECRET FERNET_KEY DB_PASSWORD ADMIN_PASSWORD; do
     val=$(env_get "$key")
     case ${val,,} in
-        '') error "$key is not set" ;;
+        '') [[ $unset_keys == *" $key "* ]] || error "$key is not set" ;;
         \<*\> | secret | password | admin | changeme)
             error "$key is a placeholder or example value: set a real one" ;;
         *) ((${#val} >= 12)) || warn "$key is short (${#val} characters)" ;;
@@ -89,20 +97,27 @@ for key in JWT_EXP_DELTA_SECONDS JWT_MAX_SESSION_SECONDS; do
 done
 
 # 4. Bind-mounted files and folders (long syntax "source:" in docker-compose.yml).
+# Mounts listed here must be folders, all others files. Add new folder mounts here.
+# shellcheck disable=SC2016  # matched literally against docker-compose.yml
+DIR_MOUNTS=('./status' '${LOCAL_PHOTO_DIRECTORY}')
 while read -r line; do
     src=$line
     while [[ $src =~ \$\{([A-Z0-9_]+)\} ]]; do
         var=${BASH_REMATCH[1]}
         src=${src//\$\{$var\}/$(env_get "$var")}
     done
+    want=file
+    for d in "${DIR_MOUNTS[@]}"; do [[ $line == "$d" ]] && want=folder; done
     if [[ -z $src ]]; then
         error "$line is mounted by docker-compose.yml but is empty"
     elif [[ ! -e $src ]]; then
-        error "$src is mounted by docker-compose.yml but does not exist"
-    elif [[ -d $src && $src =~ \.[a-z]+$ ]]; then
-        error "$src is a folder, expected a file (created by Docker when the file was missing?)"
+        error "$src is mounted by docker-compose.yml but does not exist (expected a $want)"
+    elif [[ $want == folder && ! -d $src ]]; then
+        error "$src is mounted by docker-compose.yml and must be a folder"
+    elif [[ $want == file && ! -f $src ]]; then
+        error "$src is mounted by docker-compose.yml and must be a file (a folder here is usually created by Docker when the file was missing)"
     fi
-done < <(sed -nE 's/^[[:space:]]*source:[[:space:]]*//p' docker-compose.yml)
+done < <(sed -nE 's/^[[:space:]]*source:[[:space:]]*//p' docker-compose.yml | sort -u)
 [[ ! -f application_default_credentials.json ]] || check_private application_default_credentials.json
 
 # 5. Backup to Google Cloud Storage.
