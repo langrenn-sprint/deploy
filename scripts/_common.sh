@@ -3,11 +3,14 @@
 
 log() { printf '%s %s\n' "$(date -Is)" "$*"; }
 
-# env_file_keys: names defined in .env, one per line. A quoted value that runs
-# over several lines is followed to its closing quote, so its lines are not read as
-# names; those names are printed again with a "+" in front (a multi-line value).
+# env_file_keys [FILE]: names defined in FILE (default .env), one per line, with
+# the same rules as compose: "export NAME=" and spaces around "=" are allowed.
+# A quoted value that runs over several lines is followed to its closing quote, so
+# its lines are not read as names; those names are printed again with a "+" in
+# front (a multi-line value).
 env_file_keys() {
-    [[ -f .env ]] || return 0
+    local file=${1:-.env}
+    [[ -f $file ]] || return 0
     awk '
         q != "" {   # inside a quoted value: look for the closing quote
             rest = $0
@@ -27,7 +30,7 @@ env_file_keys() {
                 if (!index(rest, c)) { q = c; print "+" head }
             }
         }
-    ' .env
+    ' "$file"
 }
 
 # Variables as docker compose resolves them for docker-compose.yml: the process

@@ -27,9 +27,8 @@ warnings=0
 error() { log "ERROR $*"; errors=$((errors + 1)); }
 warn() { log "WARNING $*"; warnings=$((warnings + 1)); }
 
-# Keys defined in an env file (ignores comments and blank lines).
-# Succeeds with no output for an empty or comments-only file.
-env_keys() { { grep -oE '^[A-Za-z_][A-Za-z0-9_]*=' "$1" || true; } | tr -d = ; }
+# Names defined in an env file, read like docker compose does (see _common.sh).
+env_keys() { env_file_keys "$1" | grep -v '^+' || true; }
 
 # Warn if a file is readable by group or others.
 check_private() {
